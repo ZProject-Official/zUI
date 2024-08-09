@@ -1,5 +1,10 @@
 # 🎮 **zUI - Bibliothèque de Menus NUI pour FiveM**
 
+<div style="display: flex; justify-content: space-around;">
+    <img src="https://i.imgur.com/mU2HFdM.png" alt="Image 1" style="border-radius: 1.5em"/>
+    <img src="https://i.imgur.com/GKriZB1.png" alt="Image 2" style="border-radius: 1.5em"/>
+</div>
+
 ## 🚀 **Introduction**
 
 **zUI** est une bibliothèque avancée pour la création de menus NUI dans FiveM. Conçue pour être **sobre**, **optimisée**, et **visuellement attrayante**, elle utilise **React** pour l'interface utilisateur, tout en vous permettant d'écrire vos scripts en **Lua**. Inspirée de RageUI, **zUI** apporte des fonctionnalités modernisées et une expérience utilisateur améliorée pour les joueurs de serveurs FiveM.
