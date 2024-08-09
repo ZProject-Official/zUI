@@ -28,6 +28,7 @@ cd zUI
 cd web
 npm install && npm build
 ```
+Ou installez la version **Release**
 
 ### 3. C'est déjà fini !
 
@@ -77,7 +78,7 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 
 ## 📬 **Support**
 
-Pour toute question ou problème, rejoignez notre [Discord](discord.gg/ZGzmkMd4rs).
+Pour toute question ou problème, rejoignez notre [Discord](https://discord.gg/ZGzmkMd4rs).
 
 ## 📜 **Licence**
 
