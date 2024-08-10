@@ -2,7 +2,7 @@
 
 <div style="display: flex; justify-content: space-around;">
     <img src="https://i.imgur.com/mU2HFdM.png" alt="Image 1" style="border-radius: 1.5em"/>
-    <img src="https://i.imgur.com/qCVE38h.png" alt="Image 2" style="border-radius: 1.5em"/>
+    <img src="https://i.imgur.com/AUC6xgB.png" alt="Image 2" style="border-radius: 1.5em"/>
 </div>
 
 
@@ -21,7 +21,7 @@ Example:SetComponents(function(Items)
                 print("Boutton cliqué !")
             end
         end)
-    Items:AddCheckbox("Checkbox", "C'est une checkbox !", false, { color = "#0000ff" },
+    Items:AddCheckbox("Checkbox", "C'est une checkbox !", false, { Color = "#0000ff" },
         function(onSelected, isChecked, onHovered)
             if onSelected then
                 if isChecked then
