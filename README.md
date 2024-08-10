@@ -41,7 +41,7 @@ end)
 
 ## 🚀 **Introduction**
 
-**zUI** est une bibliothèque avancée pour la création de menus NUI dans FiveM. Conçue pour être **sobre**, **optimisée**, et **visuellement attrayante**, elle utilise **React** pour l'interface utilisateur, tout en vous permettant d'écrire vos scripts en **Lua**. Inspirée de RageUI, **zUI** apporte des fonctionnalités modernisées et une expérience utilisateur améliorée pour les joueurs de serveurs FiveM.
+**zUI** est une bibliothèque avancée pour la création de menus NUI dans FiveM. Conçue pour être **sobre**, **optimisée**, et **visuellement attrayante**, elle utilise **React** pour l'interface utilisateur, tout en vous permettant d'écrire vos scripts en **Lua**. Inspirée de RageUI, **zUI** apporte des fonctionnalités modernisées, une expérience utilisateur améliorée et simplifie considérablement l'accès à la création de menus pour les développeurs.
 
 ## 🌟 **Caractéristiques Principales**
 
@@ -61,6 +61,7 @@ git clone https://github.com/ZProject-Official/zUI.git
 ### 2. Installer les Dépendances
 
 Naviguez dans le répertoire cloné et installez les dépendances nécessaires pour React.
+- Veillez à bien avoir [Node.js](https://nodejs.org/fr) sur votre machine.
 
 ```bash
 cd zUI
@@ -82,7 +83,7 @@ Maintenant que vous avez mis en place les bases, il est temps de vous amuser ave
 Pour créer un menu avec **zUI**, utilisez la fonction `zUI.CreateMenu`. Voici un exemple de création de menu :
 
 ```lua
-local zMenu = zUI.CreateMenu("Nom du Menu", "Description du menu", "Touche pour ouvrir le menu", "Ecriture dans le menu Fivem pour configurer la touche", "Entrez ici votre bannière")
+local Example = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ce menu utilise le zUI.", "Url de votre bannière")
 ```
 
 ### Ajouter des Éléments au Menu
@@ -90,13 +91,14 @@ local zMenu = zUI.CreateMenu("Nom du Menu", "Description du menu", "Touche pour 
 Une fois le menu créé, vous pouvez ajouter des composants tels que des séparateurs, des lignes colorées, et des boutons interactifs.
 
 ```lua
-zMenu:SetComponents(function(Menu)
-    Menu:AddSeparator("Séparateur")
-    Menu:AddLine({ "#FF0000", "#00FF00", "#0000FF" })  -- Ligne avec trois couleurs : Rouge, Vert, Bleu (Dégradé)
-    Menu:AddButton("Nom du Bouton", "Description du Bouton", {} , -- Ajoutez du style !
-        function(isClicked, isHovered)
-            if (isClicked) then
-                print("You clicked me!")
+Example:SetComponents(function(Items)
+    Items:AddSeparator("C'est un séparateur !")
+    Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
+    Items:AddButton("Bouton", "C'est un bouton !",
+        { RightLabel = "~g~500$", RightBadge = "CASH", LeftBadge = "BARBER_ICON_A" },
+        function(onSelected, onHovered)
+            if onSelected then
+                print("Boutton cliqué !")
             end
         end)
 end)
@@ -112,7 +114,7 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 
 ## 📝 **Changelog**
 
-### [v1.0.0] - 2024-08-09
+### [v1.0.0] - 2024-08-10
 - Initial release avec support pour les menus personnalisés et les composants de base.
 
 ## 📬 **Support**
