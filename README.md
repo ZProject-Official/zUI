@@ -6,7 +6,7 @@
 </div>
 
 
-## 💻 Code pour la deuxième image
+## 💻 Exemple de code illustré
 
 ```lua
 local Example = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ce menu utilise le zUI.")
