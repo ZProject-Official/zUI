@@ -62,6 +62,9 @@ end
 ---@param visible boolean @Visibilité du menu | Visibility of the menu
 function zUI:SetVisible(visible)
     self.visible = visible
+    if visible then
+        ManageMenu(self)
+    end
 end
 
 ---@return boolean @Visibilité du menu | Visibility of the menu
