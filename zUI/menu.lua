@@ -56,12 +56,21 @@ end
 
 ---@param components fun(Menu: zUI) @Les composants du menu | The menu's components
 function zUI:SetComponents(components)
-    components(self)
+    Citizen.CreateThread(function()
+        while true do
+            Wait(100)
+            self.items = {}
+            components(self)
+        end
+    end)
 end
 
 ---@param visible boolean @Visibilité du menu | Visibility of the menu
 function zUI:SetVisible(visible)
     self.visible = visible
+    if visible then
+        ManageMenu(self)
+    end
 end
 
 ---@return boolean @Visibilité du menu | Visibility of the menu
