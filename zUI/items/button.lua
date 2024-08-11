@@ -33,6 +33,7 @@ RegisterNUICallback('zUI-ActionButton', function(id, cb)
         actionData.action(true, true)
     end
     if actionData.subMenu then
+        Citizen.Wait(50)
         actionData.subMenu.visible = true
         actionData.subMenu.parent.visible = false
         ManageMenu(actionData.subMenu)
