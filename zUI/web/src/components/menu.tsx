@@ -24,6 +24,13 @@ function Menu() {
   let isSelected: boolean;
   let table: number[] = [];
 
+  const nbTotalItems = items.filter(
+    (item) =>
+      item.type !== "separator" &&
+      item.type !== "line" &&
+      !item.styles.isDisabled
+  ).length;
+
   useNuiEvent("zUI-ManageMenu", (data: any) => {
     if (data.parent) {
       setItems(data.parent.items);
@@ -41,6 +48,8 @@ function Menu() {
     }
     if (data.isVisible === false) {
       setIndex(1);
+    } else if (index > nbTotalItems) {
+      setIndex(1);
     }
   });
 
@@ -51,13 +60,6 @@ function Menu() {
   const sendMessageToList = (id: string, action: string) => {
     window.postMessage({ type: "UPDATE_LIST", id, action }, "*");
   };
-
-  const nbTotalItems = items.filter(
-    (item) =>
-      item.type !== "separator" &&
-      item.type !== "line" &&
-      !item.styles.isDisabled
-  ).length;
 
   useNuiEvent("zUI-Interaction", (data: any) => {
     if (data.type === "down") {
