@@ -100,7 +100,7 @@ local Example = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ce menu utilise le 
 Une fois le menu créé, vous pouvez ajouter des composants tels que des séparateurs, des lignes colorées, et des boutons interactifs.
 
 ```lua
-Example:SetComponents(function(Items)
+Example:SetItems(function(Items)
     Items:AddSeparator("C'est un séparateur !")
     Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
     Items:AddButton("Bouton", "C'est un bouton !",
@@ -124,12 +124,13 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 ## 📝 **Changelog**
 
 ### [v1.0.0] - 2024-08-10
-
-### [v1.0.2] - 2024-08-13
-
-### [v1.0.3] - 2024-08-18
-
 - Initial release avec support pour les menus personnalisés et les composants de base.
+
+### [v1.0.1] - 2024-08-13
+- Correction de différents problèmes.
+
+### [v1.0.2] - 2024-08-18
+- Refonte totale de la partie back-end.
 
 ## 📬 **Support**
 
