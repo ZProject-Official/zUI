@@ -97,6 +97,17 @@
   width: 3%;
 }
 
+#description {
+  width: 100%;
+  padding: 1vh 5% 1vh 5%;
+  box-sizing: border-box;
+  background-color: rgba(18, 18, 18, 0.5);
+  color: white;
+  font-family: "Lexend Light";
+  font-size: 100%;
+  border-radius: 0 0 1.5em 1.5em;
+}
+
 .zUI-ItemLeftZone {
   height: 100%;
   display: flex;

@@ -173,6 +173,30 @@ function Menu() {
     }
   }, [index, Items]);
 
+  useEffect(() => {
+    if (items.length > 0) {
+      const SelectedItem = items.find((item, id) => {
+        if (
+          item.Type !== "separator" &&
+          item.Type !== "line" &&
+          !item.Styles.IsDisabled
+        ) {
+          if (!Items.find((item) => item === id)) {
+            Items.push(id);
+          }
+          ItemIndex = Items[index - 1];
+          return ItemIndex === id;
+        }
+        return false;
+      });
+
+      if (SelectedItem) {
+        setDescription(SelectedItem.Description);
+        fetchNui("zUI-HoverItem", SelectedItem.ActionId);
+      }
+    }
+  }, [index, items]);
+
   return (
     <>
       {/* <img src={Background} id="debug-Background" /> */}
@@ -224,6 +248,11 @@ function Menu() {
             <div id="zUI-ControlsIndicator">
               <img src={Controls} id="zUI-ControlsIcon" />
             </div>
+            {description.length > 0 && (
+              <div id="description">
+                <h1>{description}</h1>
+              </div>
+            )}
           </div>
         </div>
       )}
