@@ -1,35 +1,25 @@
----@param Label string @Le nom de la checkbox | The Checkbox's name
----@param Description string @La description de la checkbox | The Checkbox's description
----@param DefaultState boolean @L'état par défaut de la checkbox | The Checkbox's default state
----@param Styles table @Les styles de la checkbox | The Checkbox's styles
----@param Action fun(onSelected: boolean, isChecked: boolean, onHovered: boolean) @Les actions de la checkbox | The Checkbox's actions
-function zUI:AddCheckbox(Label, Description, DefaultState, Styles, Action)
-    local actionId = ("%s_checkbox-actionId_zui_%s"):format(Label:gsub(" ", ""):lower(), math.random())
-    ItemsData[actionId] = { action = Action }
-    local item = {
-        type = "checkbox",
-        label = Label,
-        description = Description,
-        defaultState = DefaultState,
-        styles = {
-            leftBadge = Styles.LeftBadge,
-            rightBadge = Styles.RightBadge,
-            rightLabel = Styles.RightLabel,
-            color = Styles.Color,
-            hoverColor = Styles.HoverColor,
-            isDisabled = Styles.IsDisabled,
-            checkedColor = Styles.CheckedColor,
-        },
-        actionId = actionId
-    }
-    table.insert(self.items, item)
+---@param Title string @Titre de la checkbox
+---@param Description string | nil @Description de la checkbox
+---@param State boolean @Êtat par défaut
+---@param Styles { IsDisabled: boolean, Color: string, HoverColor: string, LeftBadge: string, CheckedColor: string} @Styles de la checkbox
+---@param Action fun(onSelected: boolean, onHovered: boolean, isChecked: boolean) @Action que doit réaliser la checkbox
+function zUI:AddCheckbox(Title, Description, State, Styles, Action)
+    local ActionId = ("zUI-CheckboxIdentifier:%s"):format(math.random())
+    local Item = {}
+    Item.Type = "checkbox"
+    Item.Title = Title
+    Item.DefaultState = State
+    Item.Description = Description
+    Item.Styles = Styles
+    Item.ActionId = ActionId
+    ItemsData[ActionId] = { Action = Action }
+    table.insert(self.Items, Item)
 end
 
-RegisterNUICallback('zUI-ActionCheckbox', function(data, cb)
-    local actionData = ItemsData[data.actionId]
-    local isChecked = data.isChecked
-    if actionData.action then
-        actionData.action(true, isChecked, true)
+RegisterNUICallback("zUI-UseCheckbox", function(data, cb)
+    local ActionData = ItemsData[data.ActionId]
+    if ActionData.Action then
+        ActionData.Action(true, true, data.State)
     end
-    cb('ok')
+    cb("ok")
 end)

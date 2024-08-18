@@ -1,8 +1,7 @@
----@param Colors table | nil @Les couleurs de la ligne | The colors of the line
+---@param Colors table | nil @Les couleurs de la ligne
 function zUI:AddLine(Colors)
-    local item = {
-        type = "line",
-        colors = Colors,
-    }
-    table.insert(self.items, item)
+    local Item = {}
+    Item.Type = "line"
+    Item.Colors = Colors
+    table.insert(self.Items, Item)
 end

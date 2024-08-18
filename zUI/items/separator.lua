@@ -1,8 +1,7 @@
----@param Label string @Le label du separateur | The label of the separator
-function zUI:AddSeparator(Label)
-    local item = {
-        type = "separator",
-        label = Label,
-    }
-    table.insert(self.items, item)
+---@param Title string @Le titre du separateur
+function zUI:AddSeparator(Title)
+    local Item = {}
+    Item.Type = "separator"
+    Item.Title = Title
+    table.insert(self.Items, Item)
 end
