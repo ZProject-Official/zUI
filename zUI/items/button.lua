@@ -1,42 +1,32 @@
----@param Label string @Le nom du bouton | The Button's name
----@param Description string @La description du bouton | The Button's description
----@param Styles table @Les styles du bouton | The Button's styles
----@param Action fun(onSelected: boolean, onHovered: boolean) @Les actions du bouton | The Button's actions
----@param SubMenu zUI | nil @Le sous-menu du bouton | The Button's sub-menu
-function zUI:AddButton(Label, Description, Styles, Action, SubMenu)
-    local actionId = ("%s_button-actionId_zui_%s"):format(Label:gsub(" ", ""):lower(), math.random())
-    if SubMenu then
-        ItemsData[actionId] = { action = Action, subMenu = SubMenu }
-    else
-        ItemsData[actionId] = { action = Action }
-    end
-    local item = {
-        type = "button",
-        label = Label,
-        description = Description,
-        styles = {
-            leftBadge = Styles.LeftBadge,
-            rightBadge = Styles.RightBadge,
-            rightLabel = Styles.RightLabel,
-            color = Styles.Color,
-            hoverColor = Styles.HoverColor,
-            isDisabled = Styles.IsDisabled,
-        },
-        actionId = actionId
-    }
-    table.insert(self.items, item)
+---@param Title string @Titre du bouton
+---@param Description string @Description du bouton
+---@param Styles { IsDisabled: boolean, RightLabel: string, RightBadge: string, LeftBadge: string, Color: string, HoverColor: string } @Styles du bouton
+---@param Action fun(onSelected: boolean, onHovered: boolean) @Action que doit réaliser le bouton
+---@param SubMenu zUI | nil @SubMenu vers lequel mène le bouton
+function zUI:AddButton(Title, Description, Styles, Action, SubMenu)
+    local ActionId = ("zUI-ButtonIdentifier:%s"):format(math.random())
+    local Item = {}
+    Item.Type = "button"
+    Item.Title = Title
+    Item.Description = Description
+    Item.Styles = Styles
+    Item.ActionId = ActionId
+    ItemsData[ActionId] = { Action = Action, Parent = self, SubMenu = SubMenu }
+    table.insert(self.Items, Item)
 end
 
-RegisterNUICallback('zUI-ActionButton', function(id, cb)
-    local actionData = ItemsData[id]
-    if actionData.action then
-        actionData.action(true, true)
+RegisterNUICallback("zUI-UseButton", function(ActionId, cb)
+    local ActionData = ItemsData[ActionId]
+    if ActionData.Action then
+        ActionData.Action(true, true)
     end
-    if actionData.subMenu then
-        Citizen.Wait(50)
-        actionData.subMenu.visible = true
-        actionData.subMenu.parent.visible = false
-        ManageMenu(actionData.subMenu)
+    if ActionData.SubMenu then
+        Citizen.Wait(10)
+        ActionData.Parent.Priority = false
+        ActionData.SubMenu.Priority = true
+        SendNUIMessage({
+            action = "zUI-Reset",
+        })
     end
-    cb('ok')
+    cb("ok")
 end)

@@ -1,79 +1,110 @@
 ---@class zUI
----@field public identifier string @Identifiant du menu | Identifier of the menu
----@field public title string @Titre du menu | Title of the menu
----@field public subtitle string @Sous-titre du menu | Subtitle of the menu
----@field public key string | nil @Touche pour ouvrir le menu | Key for open the menu
----@field public description string | nil @Description du menu | Description of the menu
----@field public banner string | nil @Bannière du menu | Banner of the menu
----@field public visible boolean @Visibilité du menu | Visibility of the menu
----@field public items table @Items du menu | Items of the menu
----@field public parent zUI
+---@field public Identifier string @Identifiant du menu
+---@field public Title string @Titre du menu
+---@field public Subtitle string @Sous-titre du menu
+---@field public Key string | nil @Touche défini pour ouvrir le menu
+---@field public Description string | nil @Description du menu
+---@field public BannerUrl string | nil @Url de la bannière du menu
+---@field public Visible boolean @Visibilité du menu
+---@field public Priority boolean @Priorité du menu
+---@field public Items table @Items du menu
+---@field public Parent zUI @Parent du submenu
 zUI = {}
 zUI.__index = zUI
+MenuIsVisible = false
+CurrentMenu = nil
 
-local menus = {}
-
-ItemsData = {}
-
----@param Title string @Le nom du menu | The Menu's name
----@param Subtitle string @Sous-titre du menu | The Menu's subtitle
----@param Key string | nil @Touche du menu | The Menu's key
----@param Description string | nil @Description du menu | The Menu's description
----@param Banner string | nil @Lien de la bannière du menu | Link of Menu's banner [380px * 100px]
-function zUI.CreateMenu(Title, Subtitle, Key, Description, Banner)
+---@param Title string @Titre du menu
+---@param Subtitle string @Sous-titre du menu
+---@param Key string | nil @Touche défini pour ouvrir le menu
+---@param Description string | nil @Description du menu
+---@param BannerUrl string | nil @Url de la bannière du menu
+function zUI.CreateMenu(Title, Subtitle, Key, Description, BannerUrl)
     ---@type zUI
     local self = setmetatable({}, zUI)
-    self.identifier = ("%s_zui_%s"):format(Title:gsub(" ", ""):lower(), math.random())
-    self.title = Title
-    self.subtitle = Subtitle
-    self.key = Key
-    self.description = Description
-    self.banner = Banner
-    self.visible = false
-    self.items = {}
+    self.Identifier = ("zUI-MenuIdentifier:%s"):format(math.random())
+    self.Title = Title
+    self.Subtitle = Subtitle
+    self.Key = Key
+    self.Description = Description
+    self.BannerUrl = BannerUrl
+    self.Visible = false
+    self.Priority = true
+    self.Items = {}
     RegisterMenu(self)
-    table.insert(menus, self)
     return self
 end
 
----@param Parent zUI @Le parent du sous-menu | The Submenu's parent
----@param Title string @Le nom du menu | The Menu's name
----@param Subtitle string @Sous-titre du menu | The Menu's subtitle
----@param Banner string | nil @Lien de la bannière du menu | Link of Menu's banner [380px * 100px]
-function zUI.CreateSubMenu(Parent, Title, Subtitle, Banner)
+---@param Parent zUI @Parent du submenu
+---@param Title string @Titre du submenu
+---@param Subtitle string @Sous-titre du submenu
+---@param BannerUrl string | nil @Url de la bannière du submenu
+function zUI.CreateSubMenu(Parent, Title, Subtitle, BannerUrl)
     ---@type zUI
     local self = setmetatable({}, zUI)
-    self.identifier = ("%s_zui-submenu_%s"):format(Title:gsub(" ", ""):lower(), math.random())
-    self.parent = Parent
-    self.title = Title
-    self.subtitle = Subtitle
-    self.banner = Banner
-    self.visible = false
-    self.items = {}
-    table.insert(menus, self)
+    self.Identifier = ("zUI-SubMenuIdentifier:%s"):format(math.random())
+    self.Parent = Parent
+    self.Title = Title
+    self.Subtitle = Subtitle
+    self.BannerUrl = BannerUrl
+    self.Priority = false
+    self.Items = {}
     return self
 end
 
----@param components fun(Menu: zUI) @Les composants du menu | The menu's components
-function zUI:SetComponents(components)
+---@param Items fun(Items: zUI) @Function pour ajouter les Items
+function zUI:SetItems(Items)
     Citizen.CreateThread(function()
+        local Delay = 500
         while true do
-            Wait(100)
-            self.items = {}
-            components(self)
+            Wait(Delay)
+            if self.Visible or self.Parent then
+                if self.Priority then
+                    Delay = 100
+                    self.Items = {}
+                    Items(self)
+                    SendNUIMessage({
+                        action = "zUI-SetItems",
+                        data = {
+                            Items = self.Items,
+                            Title = self.Title,
+                            Subtitle = self.Subtitle,
+                            Banner = self.BannerUrl,
+                        }
+                    })
+                    CurrentMenu = self
+                end
+            end
         end
     end)
 end
 
----@param visible boolean @Visibilité du menu | Visibility of the menu
-function zUI:SetVisible(visible)
-    self.visible = visible
-    if visible then
-        ManageMenu(self)
+---@param IsVisible boolean @Visibilité du menu
+function zUI:SetVisible(IsVisible)
+    self.Visible = IsVisible
+    MenuIsVisible = IsVisible
+    if IsVisible then
+        SendNUIMessage({
+            action = "zUI-SetVisible",
+            data = {
+                IsVisible = IsVisible,
+                Title = self.Title,
+                Subtitle = self.Subtitle,
+                Banner = self.BannerUrl,
+            }
+        })
+    else
+        CurrentMenu = nil
+        SendNUIMessage({
+            action = "zUI-SetVisible",
+            data = {
+                IsVisible = IsVisible,
+            }
+        })
     end
 end
 
----@return boolean @Visibilité du menu | Visibility of the menu
+---@return boolean @Visibilité du menu
 function zUI:IsVisible()
-    return self.visible
+    return self.Visible
 end

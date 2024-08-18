@@ -1,30 +1,25 @@
----@param Label string @Le nom de la list | The List's name
----@param Description string @La description de la list | The List's description
----@param Items table @La liste des items | The list of items
----@param Styles table @Les styles de la liste | The List's styles
----@param Action fun(onSelected: boolean, onHovered: boolean, Index: number) @Les actions de la list | The List's actions
-function zUI:AddList(Label, Description, Items, Styles, Action, SubMenu)
-    local actionId = ("%s_list-actionId_zui_%s"):format(Label:gsub(" ", ""):lower(), math.random())
-    ItemsData[actionId] = { action = Action }
-    local item = {
-        type = "list",
-        label = Label,
-        description = Description,
-        items = Items,
-        styles = {
-            color = Styles.Color,
-            hoverColor = Styles.HoverColor,
-            isDisabled = Styles.IsDisabled,
-        },
-        actionId = actionId
-    }
-    table.insert(self.items, item)
+---@param Title string @Titre de la liste
+---@param Description string | nil @Description de la list
+---@param Items table @Items de la liste
+---@param Styles { IsDisabled: boolean, LeftBadge: string, Color: string, HoverColor: string } @Styles de la liste
+---@param Action fun(onSelected: boolean, onHovered: boolean, index: number) @Action que doit réaliser la liste
+function zUI:AddList(Title, Description, Items, Styles, Action)
+    local ActionId = ("zUI-ListIdentifier:%s"):format(math.random())
+    local Item = {}
+    Item.Type = "list"
+    Item.Title = Title
+    Item.Description = Description
+    Item.Styles = Styles
+    Item.Items = Items
+    Item.ActionId = ActionId
+    ItemsData[ActionId] = { Action = Action }
+    table.insert(self.Items, Item)
 end
 
-RegisterNUICallback('zUI-ActionList', function(data, cb)
-    local actionData = ItemsData[data.id]
-    if actionData.action then
-        actionData.action(true, true, data.index)
+RegisterNUICallback("zUI-UseList", function(data, cb)
+    local ActionData = ItemsData[data.ActionId]
+    if ActionData.Action then
+        ActionData.Action(true, true, data.Index)
     end
-    cb('ok')
+    cb("ok")
 end)

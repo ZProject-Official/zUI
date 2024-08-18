@@ -1,22 +1,22 @@
-fx_version 'cerulean'
+fx_version "cerulean"
 game "gta5"
 lua54 "yes"
 
 author "zSquad - Soren & Jules"
 description "Un exemple de menu utilisant zUI | An example menu using zUI."
+version "1.0.3"
 
-ui_page {
-    "zUI/web/build/index.html"
-}
+ui_page "zUI/web/build/index.html"
 
 client_scripts {
+    "zUI/functions/*.lua",
     "zUI/menu.lua",
-    "zUI/utils/*.lua",
+    "zUI/menuController.lua",
     "zUI/items/*.lua",
-    "exemple.lua",
+    "example.lua"
 }
 
 files {
     "zUI/web/build/index.html",
-    'zUI/web/build/**/*'
+    "zUI/web/build/**/*"
 }

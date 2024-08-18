@@ -5,13 +5,15 @@
     <img src="https://i.imgur.com/AUC6xgB.png" alt="Image 2" style="border-radius: 1.5em"/>
 </div>
 
-
 ## 💻 Exemple de Code Illustré
 
 ```lua
 local Example = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ce menu utilise le zUI.")
+local Example_SubMenu = zUI.CreateSubMenu(Example, "Submenu", "Sous-Titre")
 
-Example:SetComponents(function(Items)
+local IsChecked = false
+
+Example:SetItems(function(Items)
     Items:AddSeparator("C'est un séparateur !")
     Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
     Items:AddButton("Bouton", "C'est un bouton !",
@@ -20,10 +22,11 @@ Example:SetComponents(function(Items)
             if onSelected then
                 print("Boutton cliqué !")
             end
-        end)
-    Items:AddCheckbox("Checkbox", "C'est une checkbox !", false, { Color = "#0000ff" },
-        function(onSelected, isChecked, onHovered)
+        end, Example_SubMenu)
+    Items:AddCheckbox("Checkbox", "C'est une checkbox !", IsChecked, { Color = "#0000ff" },
+        function(onSelected, onHovered, isChecked)
             if onSelected then
+                IsChecked = isChecked
                 if isChecked then
                     print("Je suis coché !")
                 else
@@ -31,11 +34,15 @@ Example:SetComponents(function(Items)
                 end
             end
         end)
-    Items:AddList("Liste", "C'est une liste !", { "~r~0", "~b~1" }, {}, function(onSelected, onHovered, Index)
+    Items:AddList("Liste", "C'est une liste !", { "~r~0", "~b~1" }, {}, function(onSelected, onHovered, index)
         if onSelected then
-            print(("L'index %d est sélectionné !"):format(Index))
+            print(("L'index %d est sélectionné !"):format(index))
         end
     end)
+end)
+
+Example_SubMenu:SetItems(function(Items)
+    Items:AddSeparator("This is a Submenu")
 end)
 ```
 
@@ -61,6 +68,7 @@ git clone https://github.com/ZProject-Official/zUI.git
 ### 2. Installer les Dépendances
 
 Naviguez dans le répertoire cloné et installez les dépendances nécessaires pour React.
+
 - Veillez à bien avoir [Node.js](https://nodejs.org/fr) sur votre machine.
 
 ```bash
@@ -68,6 +76,7 @@ cd zUI
 cd web
 npm install && npm build
 ```
+
 Ou installez la version **Release**
 
 ### 3. C'est déjà fini !
@@ -115,6 +124,11 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 ## 📝 **Changelog**
 
 ### [v1.0.0] - 2024-08-10
+
+### [v1.0.2] - 2024-08-13
+
+### [v1.0.3] - 2024-08-18
+
 - Initial release avec support pour les menus personnalisés et les composants de base.
 
 ## 📬 **Support**
@@ -127,4 +141,4 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ---
 
-*Merci d'avoir choisi **zUI** pour vos projets FiveM. Nous espérons que cette bibliothèque vous aidera à créer des menus NUI élégants et performants !*
+_Merci d'avoir choisi **zUI** pour vos projets FiveM. Nous espérons que cette bibliothèque vous aidera à créer des menus NUI élégants et performants !_
