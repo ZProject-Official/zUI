@@ -1,0 +1,6 @@
+.line {
+  width: 100%;
+  min-height: 0.5vh;
+  max-height: 0.5vh;
+  border-radius: 100em;
+}
