@@ -21,7 +21,6 @@ RegisterNUICallback("zUI-UseButton", function(ActionId, cb)
         ActionData.Action(true, true)
     end
     if ActionData.SubMenu then
-        Citizen.Wait(10)
         ActionData.Parent.Priority = false
         ActionData.SubMenu.Priority = true
         SendNUIMessage({
