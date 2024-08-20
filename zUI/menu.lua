@@ -11,6 +11,8 @@
 ---@field public Parent zUI @Parent du submenu
 zUI = {}
 zUI.__index = zUI
+
+local menus = {}
 MenuIsVisible = false
 CurrentMenu = nil
 
@@ -31,6 +33,7 @@ function zUI.CreateMenu(Title, Subtitle, Key, Description, BannerUrl)
     self.Visible = false
     self.Priority = false
     self.Items = {}
+    menus[#menus + 1] = self
     RegisterMenu(self)
     return self
 end
@@ -49,6 +52,7 @@ function zUI.CreateSubMenu(Parent, Title, Subtitle, BannerUrl)
     self.BannerUrl = BannerUrl
     self.Priority = false
     self.Items = {}
+    menus[#menus + 1] = self
     return self
 end
 
@@ -79,10 +83,10 @@ end
 
 ---@param IsVisible boolean @Visibilité du menu
 function zUI:SetVisible(IsVisible)
-    self.Visible = IsVisible
-    self.Priority = IsVisible
-    MenuIsVisible = IsVisible
     if IsVisible then
+        for _, menu in pairs(menus) do
+            menu.Priority = false
+        end
         SendNUIMessage({
             action = "zUI-SetVisible",
             data = {
@@ -101,6 +105,9 @@ function zUI:SetVisible(IsVisible)
             }
         })
     end
+    self.Visible = IsVisible
+    self.Priority = IsVisible
+    MenuIsVisible = IsVisible
 end
 
 ---@return boolean @Visibilité du menu
