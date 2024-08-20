@@ -29,7 +29,7 @@ function zUI.CreateMenu(Title, Subtitle, Key, Description, BannerUrl)
     self.Description = Description
     self.BannerUrl = BannerUrl
     self.Visible = false
-    self.Priority = true
+    self.Priority = false
     self.Items = {}
     RegisterMenu(self)
     return self
@@ -80,6 +80,7 @@ end
 ---@param IsVisible boolean @Visibilité du menu
 function zUI:SetVisible(IsVisible)
     self.Visible = IsVisible
+    self.Priority = IsVisible
     MenuIsVisible = IsVisible
     if IsVisible then
         SendNUIMessage({
