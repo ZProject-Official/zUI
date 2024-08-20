@@ -35,17 +35,14 @@ function Checkbox({
   IsSelected,
   ActionId,
 }: CheckboxInterface) {
-  const [IsChecked, SetIsChecked] = useState<boolean>(DefaultState);
-
   useEffect(() => {
     const handleMessage = (event: any) => {
       if (event.data.type === "UPDATE_CHECKBOX" && event.data.id === ActionId) {
         if (!Styles.IsDisabled) {
           fetchNui("zUI-UseCheckbox", {
             ActionId: ActionId,
-            State: !IsChecked,
+            State: !DefaultState,
           });
-          SetIsChecked(!IsChecked);
         }
       }
     };
@@ -54,7 +51,7 @@ function Checkbox({
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, [ActionId, IsChecked]);
+  }, [ActionId]);
 
   return (
     <div
@@ -82,13 +79,13 @@ function Checkbox({
           type="checkbox"
           className="zUI-Checkbox"
           style={
-            IsChecked && !Styles.IsDisabled
+            DefaultState && !Styles.IsDisabled
               ? {
                   backgroundColor: Styles.CheckedColor || Config.DefaultColor,
                 }
               : {}
           }
-          checked={IsChecked}
+          checked={DefaultState}
           disabled={Styles.IsDisabled}
         />
         {Styles.IsDisabled && (
