@@ -15,7 +15,7 @@
 #zUI-Menu {
   top: 0;
   left: 0;
-  max-height: 45.5%;
+  max-height: 80%;
   min-width: 20%;
   max-width: 20%;
   display: flex;
@@ -71,7 +71,7 @@
 
 #zUI-MenuItems {
   width: 100%;
-  max-height: 20vh;
+  max-height: 40vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
