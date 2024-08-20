@@ -58,22 +58,20 @@ function zUI:SetItems(Items)
         local Delay = 500
         while true do
             Wait(Delay)
-            if self.Visible or self.Parent then
-                if self.Priority then
-                    Delay = 100
-                    self.Items = {}
-                    Items(self)
-                    SendNUIMessage({
-                        action = "zUI-SetItems",
-                        data = {
-                            Items = self.Items,
-                            Title = self.Title,
-                            Subtitle = self.Subtitle,
-                            Banner = self.BannerUrl,
-                        }
-                    })
-                    CurrentMenu = self
-                end
+            if self.Priority then
+                Delay = 100
+                self.Items = {}
+                Items(self)
+                SendNUIMessage({
+                    action = "zUI-SetItems",
+                    data = {
+                        Items = self.Items,
+                        Title = self.Title,
+                        Subtitle = self.Subtitle,
+                        Banner = self.BannerUrl,
+                    }
+                })
+                CurrentMenu = self
             end
         end
     end)
