@@ -1,6 +1,10 @@
 import React from "react";
 import { textColor, fontsModifier } from "../assets/Fonts";
 import isDefined from "./isDefined";
+import arrowRight from "../assets/badges/arrowRight.svg";
+import arrowLeft from "../assets/badges/arrowLeft.svg";
+import arrowTop from "../assets/badges/arrowTop.svg";
+import arrowBottom from "../assets/badges/arrowBottom.svg";
 
 const parseText = (text: string): string[] => {
   return text.split("\n");
@@ -25,7 +29,7 @@ const formatMD = (text: string): string => {
       if (text[i] === "~") {
         let INFO = "";
         i++;
-        while (text[i] != "~") {
+        while (text[i] !== "~") {
           INFO += text[i];
           i++;
         }
@@ -46,6 +50,14 @@ const formatMD = (text: string): string => {
             finalText += `</span><span style="${currentColor}">`;
           }
         }
+      } else if (text[i] === "→") {
+        finalText += `<img src="${arrowRight}" class="zUI-Badge" />`;
+      } else if (text[i] === "↓") {
+        finalText += `<img src="${arrowBottom}" class="zUI-Badge" />`;
+      } else if (text[i] === "←") {
+        finalText += `<img src="${arrowLeft}" class="zUI-Badge" />`;
+      } else if (text[i] === "↑") {
+        finalText += `<img src="${arrowTop}" class="zUI-Badge" />`;
       } else {
         finalText += text[i];
       }
