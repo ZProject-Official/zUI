@@ -152,6 +152,10 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 
 - Refonte totale de la partie back-end.
 
+### [v1.0.3] - 2024-08-23
+
+- Ajouts de différentes features (keyboardInput, Closable, OnClose, OnListChange, Arrows, Checkbox Icon, Config).
+
 ## 📬 **Support**
 
 Pour toute question ou problème, rejoignez notre [Discord](https://discord.gg/ZGzmkMd4rs).
