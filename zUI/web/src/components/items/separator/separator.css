@@ -10,4 +10,5 @@
 .zUI-SeparatorTitle {
   color: white;
   font-family: "Lexend Regular";
+  white-space: nowrap;
 }

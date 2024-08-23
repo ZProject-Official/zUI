@@ -124,12 +124,15 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 ## 📝 **Changelog**
 
 ### [v1.0.0] - 2024-08-10
+
 - Initial release avec support pour les menus personnalisés et les composants de base.
 
 ### [v1.0.1] - 2024-08-13
+
 - Correction de différents problèmes.
 
 ### [v1.0.2] - 2024-08-18
+
 - Refonte totale de la partie back-end.
 
 ## 📬 **Support**

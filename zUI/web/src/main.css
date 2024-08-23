@@ -45,3 +45,9 @@
   src: local("Lexend ExtraLight"),
     url("./assets/fonts/Lexend-ExtraLight.ttf") format("opentype");
 }
+
+#debug-Background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}

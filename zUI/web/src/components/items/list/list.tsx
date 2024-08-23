@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 
-// Config
-import Config from "../../../../../config.json";
-
 // Utils
 import findBadge from "../../../utils/findBadge";
 import formatString from "../../../utils/formatString";
@@ -34,21 +31,34 @@ function List({ Title, Items, Styles, IsSelected, ActionId }: ListInterface) {
     const handleMessage = (event: any) => {
       if (event.data.type === "UPDATE_LIST" && event.data.id === ActionId) {
         if (!Styles.IsDisabled) {
+          let newIndex = CurrentIndex;
           if (event.data.action === "right") {
             if (CurrentIndex < Items.length - 1) {
-              SetCurrentIndex(CurrentIndex + 1);
+              newIndex = CurrentIndex + 1;
             } else {
-              SetCurrentIndex(0);
+              newIndex = 0;
             }
+            SetCurrentIndex(newIndex);
           } else if (event.data.action === "left") {
             if (CurrentIndex > 0) {
-              SetCurrentIndex(CurrentIndex - 1);
+              newIndex = CurrentIndex - 1;
             } else {
-              SetCurrentIndex(Items.length - 1);
+              newIndex = Items.length - 1;
             }
+            SetCurrentIndex(newIndex);
+          }
+          if (event.data.action === "right" || event.data.action === "left") {
+            fetchNui("zUI-UseList", {
+              ActionId: ActionId,
+              ListChange: true,
+              Selected: false,
+              Index: newIndex + 1,
+            });
           } else if (event.data.action === "enter") {
             fetchNui("zUI-UseList", {
               ActionId: ActionId,
+              ListChange: false,
+              Selected: true,
               Index: CurrentIndex + 1,
             });
           }
@@ -61,7 +71,7 @@ function List({ Title, Items, Styles, IsSelected, ActionId }: ListInterface) {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, [ActionId, CurrentIndex]);
+  }, [ActionId, CurrentIndex, Items.length, Styles.IsDisabled]);
 
   return (
     <div
@@ -69,7 +79,7 @@ function List({ Title, Items, Styles, IsSelected, ActionId }: ListInterface) {
       style={
         IsSelected
           ? {
-              background: Styles.HoverColor || Config.DefaultColor,
+              background: Styles.HoverColor,
             }
           : Styles.Color
           ? {

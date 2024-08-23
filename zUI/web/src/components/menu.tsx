@@ -13,6 +13,7 @@ import Line from "./items/line/line";
 import Separator from "./items/separator/separator";
 import List from "./items/list/list";
 import Checkbox from "./items/checkbox/checkbox";
+import formatString from "../utils/formatString";
 
 // Interfaces
 interface SetVisibleInterface {
@@ -23,6 +24,7 @@ interface SetVisibleInterface {
 }
 
 interface SetItemsInterface {
+  IsVisible: boolean;
   Items: [];
   Title: string;
   Subtitle: string;
@@ -45,6 +47,7 @@ interface ItemInterface {
   DefaultState: boolean;
   ActionId: string;
   IsSelected?: boolean;
+  DefaultColor: string;
 }
 
 function Menu() {
@@ -98,7 +101,8 @@ function Menu() {
     setDescription("");
   });
 
-  useNuiEvent("zUI-SetItems", (data: SetItemsInterface) => {
+  useNuiEvent("zUI-ManageMenu", (data: SetItemsInterface) => {
+    setVisible(data.IsVisible);
     setItems(data.Items);
     setTitle(data.Title);
     setSubtitle(data.Subtitle);
@@ -109,18 +113,21 @@ function Menu() {
 
   useNuiEvent("zUI-Interaction", (data: InteractionInterface) => {
     if (data.Type === "up") {
+      fetchNui("zUI-PlaySound", { Type: data.Type });
       if (index > 1) {
         setIndex(index - 1);
       } else {
         setIndex(NumberOfItems);
       }
     } else if (data.Type === "down") {
+      fetchNui("zUI-PlaySound", { Type: data.Type });
       if (index < NumberOfItems) {
         setIndex(index + 1);
       } else {
         setIndex(1);
       }
     } else if (data.Type === "enter") {
+      fetchNui("zUI-PlaySound", { Type: data.Type });
       let item = items[ItemIndex];
       switch (item?.Type) {
         case "button":
@@ -141,9 +148,11 @@ function Menu() {
       let item = items[ItemIndex];
       if (item.ActionId) {
         SendMessageToList(item.ActionId, data.Type);
+        if (item.Type === "list") {
+          fetchNui("zUI-PlaySound", { Type: data.Type });
+        }
       }
     }
-    fetchNui("zUI-PlaySound", { Type: data.Type });
   });
 
   // UseEffect
@@ -250,7 +259,7 @@ function Menu() {
             </div>
             {description.length > 0 && (
               <div id="description">
-                <h1>{description}</h1>
+                <h1>{formatString(description)}</h1>
               </div>
             )}
           </div>

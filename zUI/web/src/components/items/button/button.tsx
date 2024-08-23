@@ -1,6 +1,3 @@
-// Config
-import Config from "../../../../../config.json";
-
 // Images
 import LockedIcon from "../../../assets/icons/locked.svg";
 
@@ -31,7 +28,7 @@ function Button({ Title, Styles, IsSelected }: ButtonInterface) {
       style={
         IsSelected
           ? {
-              background: Styles.HoverColor || Config.DefaultColor,
+              background: Styles.HoverColor,
             }
           : Styles.Color
           ? {

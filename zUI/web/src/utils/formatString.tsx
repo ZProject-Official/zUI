@@ -20,10 +20,18 @@ const formatString = (text: string) => {
   ));
 };
 
+const arrowMappings: { [key: string]: string } = {
+  "→": `<img src="${arrowRight}" class="zUI-Arrows" />`,
+  "↓": `<img src="${arrowBottom}" class="zUI-Arrows" />`,
+  "←": `<img src="${arrowLeft}" class="zUI-Arrows" />`,
+  "↑": `<img src="${arrowTop}" class="zUI-Arrows" />`,
+};
+
 const formatMD = (text: string): string => {
   let everColoring = false;
   let currentColor = "";
   let finalText = "";
+
   if (text) {
     for (let i = 0; i < text.length; i++) {
       if (text[i] === "~") {
@@ -35,34 +43,25 @@ const formatMD = (text: string): string => {
         }
         if (isDefined(textColor[INFO])) {
           currentColor = textColor[INFO];
-          if (!everColoring) {
-            finalText += `<span style="color: ${currentColor}">`;
-            everColoring = true;
-          } else {
-            finalText += `</span><span style="color: ${currentColor}">`;
-          }
+          finalText += everColoring
+            ? `</span><span style="color: ${currentColor}">`
+            : `<span style="color: ${currentColor}">`;
+          everColoring = true;
         } else if (isDefined(fontsModifier[INFO])) {
           currentColor = fontsModifier[INFO];
-          if (!everColoring) {
-            finalText += `<span style="${currentColor}">`;
-            everColoring = true;
-          } else {
-            finalText += `</span><span style="${currentColor}">`;
-          }
+          finalText += everColoring
+            ? `</span><span style="${currentColor}">`
+            : `<span style="${currentColor}">`;
+          everColoring = true;
         }
-      } else if (text[i] === "→") {
-        finalText += `<img src="${arrowRight}" class="zUI-Badge" />`;
-      } else if (text[i] === "↓") {
-        finalText += `<img src="${arrowBottom}" class="zUI-Badge" />`;
-      } else if (text[i] === "←") {
-        finalText += `<img src="${arrowLeft}" class="zUI-Badge" />`;
-      } else if (text[i] === "↑") {
-        finalText += `<img src="${arrowTop}" class="zUI-Badge" />`;
+      } else if (arrowMappings[text[i]]) {
+        finalText += arrowMappings[text[i]];
       } else {
         finalText += text[i];
       }
     }
   }
+
   if (everColoring) {
     finalText += "</span>";
   }
