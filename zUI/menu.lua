@@ -8,6 +8,8 @@
 ---@field public Visible boolean @Visibilité du menu
 ---@field public Priority boolean @Priorité du menu
 ---@field public Items table @Items du menu
+---@field public OnCloseEvent fun() @Function à éxécuter à la fermeture
+---@field public Closable boolean @Le menu peut se fermer
 ---@field public Parent zUI @Parent du submenu
 zUI = {}
 zUI.__index = zUI
@@ -32,7 +34,12 @@ function zUI.CreateMenu(Title, Subtitle, Key, Description, BannerUrl)
     self.BannerUrl = BannerUrl
     self.Visible = false
     self.Priority = false
+    self.Closable = true
     self.Items = {}
+    function self.OnCloseEvent()
+
+    end
+
     menus[#menus + 1] = self
     RegisterMenu(self)
     return self
@@ -51,7 +58,12 @@ function zUI.CreateSubMenu(Parent, Title, Subtitle, BannerUrl)
     self.Subtitle = Subtitle
     self.BannerUrl = BannerUrl
     self.Priority = false
+    self.Closable = true
     self.Items = {}
+    function self.OnCloseEvent()
+
+    end
+
     menus[#menus + 1] = self
     return self
 end
@@ -63,19 +75,30 @@ function zUI:SetItems(Items)
         while true do
             Wait(Delay)
             if self.Priority then
-                Delay = 100
-                self.Items = {}
-                Items(self)
-                SendNUIMessage({
-                    action = "zUI-SetItems",
-                    data = {
-                        Items = self.Items,
-                        Title = self.Title,
-                        Subtitle = self.Subtitle,
-                        Banner = self.BannerUrl,
-                    }
-                })
-                CurrentMenu = self
+                if not IsPauseMenuActive() then
+                    Delay = 100
+                    self.Items = {}
+                    Items(self)
+                    SendNUIMessage({
+                        action = "zUI-ManageMenu",
+                        data = {
+                            IsVisible = true,
+                            Items = self.Items,
+                            Title = self.Title,
+                            Subtitle = self.Subtitle,
+                            Banner = self.BannerUrl,
+                        }
+                    })
+                    CurrentMenu = self
+                else
+                    SendNUIMessage({
+                        action = "zUI-ManageMenu",
+                        data = {
+                            IsVisible = false,
+                            Items = {}
+                        }
+                    })
+                end
             end
         end
     end)
@@ -97,13 +120,16 @@ function zUI:SetVisible(IsVisible)
             }
         })
     else
-        CurrentMenu = nil
-        SendNUIMessage({
-            action = "zUI-SetVisible",
-            data = {
-                IsVisible = IsVisible,
-            }
-        })
+        if CurrentMenu.Closable then
+            CurrentMenu.OnCloseEvent()
+            CurrentMenu = nil
+            SendNUIMessage({
+                action = "zUI-SetVisible",
+                data = {
+                    IsVisible = IsVisible,
+                }
+            })
+        end
     end
     self.Visible = IsVisible
     self.Priority = IsVisible
@@ -113,4 +139,14 @@ end
 ---@return boolean @Visibilité du menu
 function zUI:IsVisible()
     return self.Visible
+end
+
+---@param Function fun() @Function à éxécuter à la fermeture
+function zUI:OnClose(Function)
+    self.OnCloseEvent = Function
+end
+
+---@param Closable boolean @Le menu peut se fermer
+function zUI:SetClosable(Closable)
+    self.Closable = Closable
 end

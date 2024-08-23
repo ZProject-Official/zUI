@@ -13,6 +13,7 @@
 .zUI-ItemTitle {
   color: white;
   font-family: "Lexend Regular";
+  white-space: nowrap;
 }
 
 .zUI-ItemRightLabel {

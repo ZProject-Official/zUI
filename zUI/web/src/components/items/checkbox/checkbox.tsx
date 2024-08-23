@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 
-// Config
-import Config from "../../../../../config.json";
-
 // Utils
 import findBadge from "../../../utils/findBadge";
 import formatString from "../../../utils/formatString";
@@ -35,14 +32,17 @@ function Checkbox({
   IsSelected,
   ActionId,
 }: CheckboxInterface) {
+  const [IsChecked, SetIsChecked] = useState<boolean>(DefaultState);
+
   useEffect(() => {
     const handleMessage = (event: any) => {
       if (event.data.type === "UPDATE_CHECKBOX" && event.data.id === ActionId) {
         if (!Styles.IsDisabled) {
           fetchNui("zUI-UseCheckbox", {
             ActionId: ActionId,
-            State: !DefaultState,
+            State: !IsChecked,
           });
+          SetIsChecked(!IsChecked);
         }
       }
     };
@@ -51,7 +51,7 @@ function Checkbox({
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, [ActionId]);
+  }, [ActionId, IsChecked]);
 
   return (
     <div
@@ -59,7 +59,7 @@ function Checkbox({
       style={
         IsSelected
           ? {
-              background: Styles.HoverColor || Config.DefaultColor,
+              background: Styles.HoverColor,
             }
           : Styles.Color
           ? {
@@ -79,13 +79,13 @@ function Checkbox({
           type="checkbox"
           className="zUI-Checkbox"
           style={
-            DefaultState && !Styles.IsDisabled
+            IsChecked && !Styles.IsDisabled
               ? {
-                  backgroundColor: Styles.CheckedColor || Config.DefaultColor,
+                  backgroundColor: Styles.CheckedColor || Styles.HoverColor,
                 }
               : {}
           }
-          checked={DefaultState}
+          checked={IsChecked}
           disabled={Styles.IsDisabled}
         />
         {Styles.IsDisabled && (

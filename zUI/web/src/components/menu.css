@@ -1,9 +1,3 @@
-#debug-Background {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-
 .zUI-Container {
   position: absolute;
   height: 100%;
@@ -133,5 +127,12 @@
 
 .zUI-Badge {
   max-width: 2vw;
-  margin: -5%;
+  vertical-align: middle;
+  margin: -0.5%;
+}
+
+.zUI-Arrows {
+  max-width: 2vw;
+  vertical-align: middle;
+  margin: 0.5%;
 }

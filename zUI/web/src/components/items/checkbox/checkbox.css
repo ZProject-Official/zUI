@@ -12,6 +12,21 @@
   transition: 0.5s;
 }
 
+.zUI-Checkbox:checked::after {
+  content: "\2714"; /* Unicode for a checkmark */
+  font-size: 0.75vh;
+  color: rgba(255, 255, 255, 0);
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.5s;
+}
+
+.zUI-Checkbox:checked::after {
+  color: rgba(255, 255, 255, 1);
+}
+
 .zUI-Checkbox:disabled {
   background-color: rgba(100, 100, 100, 1);
   border: 0.15em solid rgb(50, 50, 50);

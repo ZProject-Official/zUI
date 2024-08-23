@@ -40,7 +40,7 @@ Citizen.CreateThread(function()
                 Delay = 0
             end
 
-            if IsControlJustPressed(2, 191) then -- Enter
+            if IsControlJustPressed(2, 191) or IsControlJustPressed(2, 201) then -- Enter
                 SendNUIMessage({
                     action = "zUI-Interaction",
                     data = {

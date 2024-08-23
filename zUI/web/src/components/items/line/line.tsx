@@ -1,12 +1,10 @@
-// Config
-import Config from "../../../../../config.json";
-
 // Interfaces
 interface LineInterface {
   Colors?: string[];
+  DefaultColor: string;
 }
 
-function Line({ Colors }: LineInterface) {
+function Line({ Colors, DefaultColor }: LineInterface) {
   return (
     <div className="zUI-Item">
       <div
@@ -15,7 +13,7 @@ function Line({ Colors }: LineInterface) {
           background:
             Colors && Colors.length > 1
               ? `linear-gradient(to right, ${Colors.join(", ")})`
-              : Config.DefaultColor,
+              : DefaultColor,
         }}
       ></div>
     </div>
