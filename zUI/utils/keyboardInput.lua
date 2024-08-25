@@ -20,15 +20,15 @@ function zUI.KeyboardInput(Title, Subtitle, PlaceHolder, MaxStringLenght)
     RegisterNUICallback('zUI-KeyboardResult', function(data, cb)
         NuiResponse = data.inputValue
         promise:resolve(NuiResponse)
-        SetNuiFocus(false, false)
         cb('ok')
     end)
     RegisterNUICallback('zUI-KeyboardCancel', function(data, cb)
         NuiResponse = nil
         promise:resolve(NuiResponse)
-        SetNuiFocus(false, false)
         cb('ok')
     end)
     Citizen.Wait(0)
-    return Citizen.Await(promise)
+    local response = Citizen.Await(promise)
+    SetNuiFocus(false, false)
+    return response
 end
