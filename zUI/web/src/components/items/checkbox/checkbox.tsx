@@ -23,6 +23,8 @@ interface CheckboxInterface {
   };
   IsSelected?: boolean;
   ActionId: string;
+  DefaultColor: string;
+  HoverType: string;
 }
 
 function Checkbox({
@@ -31,18 +33,17 @@ function Checkbox({
   Styles,
   IsSelected,
   ActionId,
+  DefaultColor,
+  HoverType,
 }: CheckboxInterface) {
-  const [IsChecked, SetIsChecked] = useState<boolean>(DefaultState);
-
   useEffect(() => {
     const handleMessage = (event: any) => {
       if (event.data.type === "UPDATE_CHECKBOX" && event.data.id === ActionId) {
         if (!Styles.IsDisabled) {
           fetchNui("zUI-UseCheckbox", {
             ActionId: ActionId,
-            State: !IsChecked,
+            State: !DefaultState,
           });
-          SetIsChecked(!IsChecked);
         }
       }
     };
@@ -51,16 +52,21 @@ function Checkbox({
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, [ActionId, IsChecked]);
+  }, [ActionId]);
 
   return (
     <div
       className="zUI-Item"
       style={
         IsSelected
-          ? {
-              background: Styles.HoverColor,
-            }
+          ? HoverType === "complete"
+            ? {
+                background: Styles.HoverColor,
+              }
+            : {
+                background: Styles.Color,
+                borderLeft: `solid 0.25vw ${Styles.HoverColor}`,
+              }
           : Styles.Color
           ? {
               background: Styles.Color,
@@ -79,13 +85,13 @@ function Checkbox({
           type="checkbox"
           className="zUI-Checkbox"
           style={
-            IsChecked && !Styles.IsDisabled
+            DefaultState && !Styles.IsDisabled
               ? {
-                  backgroundColor: Styles.CheckedColor || Styles.HoverColor,
+                  backgroundColor: Styles.CheckedColor || DefaultColor,
                 }
               : {}
           }
-          checked={IsChecked}
+          checked={DefaultState}
           disabled={Styles.IsDisabled}
         />
         {Styles.IsDisabled && (

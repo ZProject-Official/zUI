@@ -19,17 +19,23 @@ interface ButtonInterface {
   };
   ActionId: string;
   IsSelected?: boolean;
+  HoverType: string;
 }
 
-function Button({ Title, Styles, IsSelected }: ButtonInterface) {
+function Button({ Title, Styles, IsSelected, HoverType }: ButtonInterface) {
   return (
     <div
       className="zUI-Item"
       style={
         IsSelected
-          ? {
-              background: Styles.HoverColor,
-            }
+          ? HoverType === "complete"
+            ? {
+                background: Styles.HoverColor,
+              }
+            : {
+                background: Styles.Color,
+                borderLeft: `solid 0.25vw ${Styles.HoverColor}`,
+              }
           : Styles.Color
           ? {
               background: Styles.Color,

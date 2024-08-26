@@ -1,53 +1,38 @@
-local Example = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ce menu utilise le zUI.")
-Example:SetClosable(false)
-local Example_SubMenu = zUI.CreateSubMenu(Example, "Submenu", "Sous-Titre")
+local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ouvrir le menu exemple.", "https://i.ibb.co/z8TFzVq/banner.png")
+local SubMenu = zUI.CreateSubMenu(Menu, "Titre", "Sous-Titre")
 
-local IsChecked = false
+local CheckboxState = false
 
-
-Example:SetItems(function(Items)
-    Items:AddSeparator("C'est un séparateur !")
+Menu:SetItems(function(Items)
+    Items:AddSeparator("C'est un séparateur")
     Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
-    Items:AddButton("Bouton", "C'est un bouton !",
-        { RightLabel = "→" },
-        function(onSelected, onHovered)
-            if onSelected then
-                print("Boutton cliqué !")
-            end
-        end, Example_SubMenu)
-    Items:AddButton("Bouton #2", "C'est un bouton qui utilise le KeyboardInput !", { RightBadge = "CLOTHING_ICON_B" },
-        function(onSelected, onHovered)
-            if onSelected then
-                local Question = zUI.KeyboardInput("Titre", "Sous-Titre", "PlaceHolder :)", 15)
-                print(("Réponse: %s"):format(Question))
-            end
-        end)
-    Items:AddCheckbox("Checkbox", "C'est une checkbox !", IsChecked, { Color = "#0000ff" },
+    Items:AddButton("Bouton", "Accéder au submenu.", { RightLabel = "→" }, function(onSelected, onHovered)
+
+    end, SubMenu)
+    Items:AddCheckbox("Checkbox", "Gérer l'êtat de la checkbox.", CheckboxState, { LeftBadge = "CASH" },
         function(onSelected, onHovered, isChecked)
             if onSelected then
-                IsChecked = isChecked
-                if isChecked then
-                    print("Je suis coché !")
+                CheckboxState = isChecked
+            end
+        end)
+    Items:AddList("Liste", "Choisir entre le ~#faccdd~KeyboardInput~s~ et le ~#dcc789~AlertInput~s~.",
+        { "KeyboardInput", "AlertInput" }, {}, function(onSelected, onHovered, onListChange, index)
+            if onSelected then
+                if index == 1 then
+                    local value = zUI.KeyboardInput("Titre", "Sous-titre", "Placeholder", 50)
+                    print(value)
                 else
-                    print("Je ne suis pas coché :'(")
+                    local value = zUI.AlertInput("Titre", "Sous-titre", "Le zUI est la meilleur librairie ?")
+                    print(value)
                 end
             end
         end)
-    Items:AddList("Liste", "C'est une liste !", { "~r~0", "~b~1" }, {},
-        function(onSelected, onHovered, onListChange, index)
-            if onSelected then
-                print(("L'index %d est sélectionné !"):format(index))
-            end
-            if onListChange then
-                print(("L'index %d est apparu !"):format(index))
-            end
-        end)
 end)
 
-Example:OnClose(function()
-    print("I'm closed !")
+Menu:OnClose(function()
+    print("Je suis fermé !")
 end)
 
-Example_SubMenu:SetItems(function(Items)
-    Items:AddSeparator("This is a Submenu")
+SubMenu:SetItems(function(Items)
+    Items:AddSeparator("Je suis le submenu :)")
 end)
