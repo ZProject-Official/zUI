@@ -7,7 +7,9 @@
 
 # **zUI - Aperçu Vidéo**
 <div style="display: flex; justify-content: space-around;">
-[![zUI v1.0.4](https://i.imgur.com/7uXS39I.png)](https://www.youtube.com/watch?v=NA2F-zxJpLk)
+    <a href="https://www.youtube.com/watch?v=NA2F-zxJpLk">
+        <img src="https://i.imgur.com/7uXS39I.png" alt="Image Vidéo"/>
+    </a>
 </div>
 
 ## 💻 Exemple de Code Illustré
