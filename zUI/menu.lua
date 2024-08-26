@@ -115,6 +115,7 @@ function zUI:SetVisible(IsVisible)
             data = {
                 IsVisible = IsVisible,
                 Title = self.Title,
+                HoverType = Config.HoverType,
                 Subtitle = self.Subtitle,
                 Banner = self.BannerUrl,
             }

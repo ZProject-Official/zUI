@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import formatString from "../../utils/formatString";
 import { useNuiEvent } from "../../Hooks/useNuiEvent";
 import darkenColor from "../../utils/darkenColor";
@@ -20,6 +20,7 @@ function KeyboardInput() {
   const [maxLength, SetMaxLength] = useState<number>(15);
   const [inputValue, setInputValue] = useState<string>("");
   const [color, SetColor] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useNuiEvent<KeyboardProps>("zUI-KeyboardInput", (data) => {
     SetTitle(data.Title);
@@ -49,6 +50,12 @@ function KeyboardInput() {
     SetVisible(false);
   };
 
+  useEffect(() => {
+    if (visible && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [visible]);
+
   return (
     <>
       {visible && (
@@ -61,6 +68,7 @@ function KeyboardInput() {
             <form id="keyboardInput-form" onSubmit={handleSubmit}>
               <input
                 type="text"
+                ref={inputRef}
                 placeholder={placeHolder}
                 maxLength={maxLength}
                 onChange={(e) => setInputValue(e.target.value)}

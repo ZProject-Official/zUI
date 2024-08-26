@@ -2,65 +2,55 @@
 
 <div style="display: flex; justify-content: space-around;">
     <img src="https://i.imgur.com/mU2HFdM.png" alt="Image 1" style="border-radius: 1.5em"/>
-    <img src="https://i.imgur.com/AUC6xgB.png" alt="Image 2" style="border-radius: 1.5em"/>
+    <img src="https://i.imgur.com/WCvQ301.png" alt="Image 2" style="border-radius: 1.5em"/>
 </div>
+
+# **zUI - Aperçu Vidéo**
+
+[![zUI v1.0.4](https://img.youtube.com/vi/NA2F-zxJpLk/0.jpg)](https://www.youtube.com/watch?v=NA2F-zxJpLk)
 
 ## 💻 Exemple de Code Illustré
 
 ```lua
-local Example = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ce menu utilise le zUI.")
-Example:SetClosable(false)
-local Example_SubMenu = zUI.CreateSubMenu(Example, "Submenu", "Sous-Titre")
+local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ouvrir le menu exemple.", "https://i.ibb.co/z8TFzVq/banner.png")
+local SubMenu = zUI.CreateSubMenu(Menu, "Titre", "Sous-Titre")
 
-local IsChecked = false
+local CheckboxState = false
 
-
-Example:SetItems(function(Items)
-    Items:AddSeparator("C'est un séparateur !")
+Menu:SetItems(function(Items)
+    Items:AddSeparator("C'est un séparateur")
     Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
-    Items:AddButton("Bouton", "C'est un bouton !",
-        { RightLabel = "→" },
-        function(onSelected, onHovered)
-            if onSelected then
-                print("Boutton cliqué !")
-            end
-        end, Example_SubMenu)
-    Items:AddButton("Bouton #2", "C'est un bouton qui utilise le KeyboardInput !", { RightBadge = "CLOTHING_ICON_B" },
-        function(onSelected, onHovered)
-            if onSelected then
-                local Question = zUI.KeyboardInput("Titre", "Sous-Titre", "PlaceHolder :)", 15)
-                print(("Réponse: %s"):format(Question))
-            end
-        end)
-    Items:AddCheckbox("Checkbox", "C'est une checkbox !", IsChecked, { Color = "#0000ff" },
+    Items:AddButton("Bouton", "Accéder au submenu.", { RightLabel = "→" }, function(onSelected, onHovered)
+
+    end, SubMenu)
+    Items:AddCheckbox("Checkbox", "Gérer l'êtat de la checkbox.", CheckboxState, { LeftBadge = "CASH" },
         function(onSelected, onHovered, isChecked)
             if onSelected then
-                IsChecked = isChecked
-                if isChecked then
-                    print("Je suis coché !")
+                CheckboxState = isChecked
+            end
+        end)
+    Items:AddList("Liste", "Choisir entre le ~#faccdd~KeyboardInput~s~ et le ~#dcc789~AlertInput~s~.",
+        { "KeyboardInput", "AlertInput" }, {}, function(onSelected, onHovered, onListChange, index)
+            if onSelected then
+                if index == 1 then
+                    local value = zUI.KeyboardInput("Titre", "Sous-titre", "Placeholder", 50)
+                    print(value)
                 else
-                    print("Je ne suis pas coché :'(")
+                    local value = zUI.AlertInput("Titre", "Sous-titre", "Le zUI est la meilleur librairie ?")
+                    print(value)
                 end
             end
         end)
-    Items:AddList("Liste", "C'est une liste !", { "~r~0", "~b~1" }, {},
-        function(onSelected, onHovered, onListChange, index)
-            if onSelected then
-                print(("L'index %d est sélectionné !"):format(index))
-            end
-            if onListChange then
-                print(("L'index %d est apparu !"):format(index))
-            end
-        end)
 end)
 
-Example:OnClose(function()
-    print("I'm closed !")
+Menu:OnClose(function()
+    print("Je suis fermé !")
 end)
 
-Example_SubMenu:SetItems(function(Items)
-    Items:AddSeparator("This is a Submenu")
+SubMenu:SetItems(function(Items)
+    Items:AddSeparator("Je suis le submenu :)")
 end)
+
 ```
 
 ## 🚀 **Introduction**
@@ -109,7 +99,7 @@ Maintenant que vous avez mis en place les bases, il est temps de vous amuser ave
 Pour créer un menu avec **zUI**, utilisez la fonction `zUI.CreateMenu`. Voici un exemple de création de menu :
 
 ```lua
-local Example = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ce menu utilise le zUI.", "Url de votre bannière")
+local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ouvrir le menu exemple.", "Url de votre bannière")
 ```
 
 ### Ajouter des Éléments au Menu
@@ -117,14 +107,28 @@ local Example = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ce menu utilise le 
 Une fois le menu créé, vous pouvez ajouter des composants tels que des séparateurs, des lignes colorées, et des boutons interactifs.
 
 ```lua
-Example:SetItems(function(Items)
-    Items:AddSeparator("C'est un séparateur !")
+Menu:SetItems(function(Items)
+    Items:AddSeparator("C'est un séparateur")
     Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
-    Items:AddButton("Bouton", "C'est un bouton !",
-        { RightLabel = "~g~500$", RightBadge = "CASH", LeftBadge = "BARBER_ICON_A" },
-        function(onSelected, onHovered)
+    Items:AddButton("Bouton", "Accéder au submenu.", { RightLabel = "→" }, function(onSelected, onHovered)
+
+    end, SubMenu)
+    Items:AddCheckbox("Checkbox", "Gérer l'êtat de la checkbox.", CheckboxState, { LeftBadge = "CASH" },
+        function(onSelected, onHovered, isChecked)
             if onSelected then
-                print("Boutton cliqué !")
+                CheckboxState = isChecked
+            end
+        end)
+    Items:AddList("Liste", "Choisir entre le ~#faccdd~KeyboardInput~s~ et le ~#dcc789~AlertInput~s~.",
+        { "KeyboardInput", "AlertInput" }, {}, function(onSelected, onHovered, onListChange, index)
+            if onSelected then
+                if index == 1 then
+                    local value = zUI.KeyboardInput("Titre", "Sous-titre", "Placeholder", 50)
+                    print(value)
+                else
+                    local value = zUI.AlertInput("Titre", "Sous-titre", "Le zUI est la meilleur librairie ?")
+                    print(value)
+                end
             end
         end)
 end)
@@ -155,6 +159,10 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 ### [v1.0.3] - 2024-08-23
 
 - Ajouts de différentes features (keyboardInput, Closable, OnClose, OnListChange, Arrows, Checkbox Icon, Config).
+
+### [v1.0.4] - 2024-08-26
+
+- Ajouts de différentes features (AlertInput, Couleurs personnalisés `~#faad2c~`, Animations, Scrool de façon smooth, Optimisation de la navigation, Hover configurable, Auto focus dans le keyboardInput).
 
 ## 📬 **Support**
 

@@ -20,6 +20,9 @@ const formatString = (text: string) => {
   ));
 };
 
+const isHexColor = (str: string) =>
+  /^#[0-9A-Fa-f]{6}$|^#[0-9A-Fa-f]{3}$/.test(str);
+
 const arrowMappings: { [key: string]: string } = {
   "→": `<img src="${arrowRight}" class="zUI-Arrows" />`,
   "↓": `<img src="${arrowBottom}" class="zUI-Arrows" />`,
@@ -52,6 +55,11 @@ const formatMD = (text: string): string => {
           finalText += everColoring
             ? `</span><span style="${currentColor}">`
             : `<span style="${currentColor}">`;
+          everColoring = true;
+        } else if (isHexColor(INFO)) {
+          finalText += everColoring
+            ? `</span><span style="color: ${INFO}">`
+            : `<span style="color: ${INFO}">`;
           everColoring = true;
         }
       } else if (arrowMappings[text[i]]) {

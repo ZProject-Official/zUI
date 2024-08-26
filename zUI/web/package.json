@@ -13,6 +13,7 @@
   "dependencies": {
     "@babel/core": "^7.20.12",
     "@emotion/react": "^11.10.5",
+    "framer-motion": "^11.3.30",
     "react": "^18.0.0",
     "react-dom": "^18.2.0"
   },

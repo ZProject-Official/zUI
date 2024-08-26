@@ -22,9 +22,17 @@ interface ListInterface {
   };
   IsSelected?: boolean;
   ActionId: string;
+  HoverType: string;
 }
 
-function List({ Title, Items, Styles, IsSelected, ActionId }: ListInterface) {
+function List({
+  Title,
+  Items,
+  Styles,
+  IsSelected,
+  ActionId,
+  HoverType,
+}: ListInterface) {
   const [CurrentIndex, SetCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -78,9 +86,14 @@ function List({ Title, Items, Styles, IsSelected, ActionId }: ListInterface) {
       className="zUI-Item"
       style={
         IsSelected
-          ? {
-              background: Styles.HoverColor,
-            }
+          ? HoverType === "complete"
+            ? {
+                background: Styles.HoverColor,
+              }
+            : {
+                background: Styles.Color,
+                borderLeft: `solid 0.25vw ${Styles.HoverColor}`,
+              }
           : Styles.Color
           ? {
               background: Styles.Color,
