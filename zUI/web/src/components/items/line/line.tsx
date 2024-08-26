@@ -13,6 +13,8 @@ function Line({ Colors, DefaultColor }: LineInterface) {
           background:
             Colors && Colors.length > 1
               ? `linear-gradient(to right, ${Colors.join(", ")})`
+              : Colors && Colors.length === 1
+              ? Colors[0]
               : DefaultColor,
         }}
       ></div>
