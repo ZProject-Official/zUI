@@ -6,8 +6,9 @@
 </div>
 
 # **zUI - Aperçu Vidéo**
-
-[![zUI v1.0.4](https://img.youtube.com/vi/NA2F-zxJpLk/0.jpg)](https://www.youtube.com/watch?v=NA2F-zxJpLk)
+<div style="display: flex; justify-content: space-around;">
+[![zUI v1.0.4](https://i.imgur.com/7uXS39I.png)](https://www.youtube.com/watch?v=NA2F-zxJpLk)
+</div>
 
 ## 💻 Exemple de Code Illustré
 
