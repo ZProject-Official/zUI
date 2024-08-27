@@ -2,4 +2,4 @@ Config = {}
 
 Config.DefaultColor = "#FA2C76"
 
-Config.HoverType = "rod" -- complete or rod
+Config.HoverType = "complete" -- complete or rod
