@@ -7,9 +7,6 @@ Menu:SetItems(function(Items)
     Items:AddSeparator("C'est un séparateur")
     Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
     Items:AddButton("Bouton", "Accéder au submenu.", { RightLabel = "→" }, function(onSelected, onHovered)
-        if onHovered then
-            print("test")
-        end
     end, SubMenu)
     Items:AddCheckbox("Checkbox", "Gérer l'êtat de la checkbox.", CheckboxState, { LeftBadge = "CASH" },
         function(onSelected, onHovered, isChecked)
@@ -29,6 +26,10 @@ Menu:SetItems(function(Items)
                 end
             end
         end)
+end)
+
+Menu:OnOpen(function()
+    print("Je suis ouvert !")
 end)
 
 Menu:OnClose(function()
