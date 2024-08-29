@@ -9,6 +9,7 @@
 ---@field public Priority boolean @Priorité du menu
 ---@field public Items table @Items du menu
 ---@field public OnCloseEvent fun() @Function à éxécuter à la fermeture
+---@field public onOpenEvent fun() @Function à éxécuter à l'ouverture
 ---@field public Closable boolean @Le menu peut se fermer
 ---@field public Parent zUI @Parent du submenu
 zUI = {}
@@ -40,6 +41,10 @@ function zUI.CreateMenu(Title, Subtitle, Key, Description, BannerUrl)
 
     end
 
+    function self.OnOpenEvent()
+
+    end
+
     menus[#menus + 1] = self
     RegisterMenu(self)
     return self
@@ -61,6 +66,10 @@ function zUI.CreateSubMenu(Parent, Title, Subtitle, BannerUrl)
     self.Closable = true
     self.Items = {}
     function self.OnCloseEvent()
+
+    end
+
+    function self.OnOpenEvent()
 
     end
 
@@ -89,7 +98,6 @@ function zUI:SetItems(Items)
                             Banner = self.BannerUrl,
                         }
                     })
-                    CurrentMenu = self
                 else
                     SendNUIMessage({
                         action = "zUI-ManageMenu",
@@ -107,6 +115,8 @@ end
 ---@param IsVisible boolean @Visibilité du menu
 function zUI:SetVisible(IsVisible)
     if IsVisible then
+        CurrentMenu = self
+        CurrentMenu.OnOpenEvent()
         for _, menu in pairs(menus) do
             menu.Priority = false
         end
@@ -145,6 +155,11 @@ end
 ---@param Function fun() @Function à éxécuter à la fermeture
 function zUI:OnClose(Function)
     self.OnCloseEvent = Function
+end
+
+---@param Function fun() @Function à éxécuter à l'ouverture
+function zUI:OnOpen(Function)
+    self.OnOpenEvent = Function
 end
 
 ---@param Closable boolean @Le menu peut se fermer
