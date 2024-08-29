@@ -98,6 +98,7 @@ function zUI:SetItems(Items)
                             Banner = self.BannerUrl,
                         }
                     })
+                    CurrentMenu = self
                 else
                     SendNUIMessage({
                         action = "zUI-ManageMenu",
@@ -115,8 +116,7 @@ end
 ---@param IsVisible boolean @Visibilité du menu
 function zUI:SetVisible(IsVisible)
     if IsVisible then
-        CurrentMenu = self
-        CurrentMenu.OnOpenEvent()
+        self.OnOpenEvent()
         for _, menu in pairs(menus) do
             menu.Priority = false
         end
