@@ -59,9 +59,9 @@ function zUI.CreateSubMenu(Parent, Title, Subtitle, BannerUrl)
     local self = setmetatable({}, zUI)
     self.Identifier = ("zUI-SubMenuIdentifier:%s"):format(math.random())
     self.Parent = Parent
-    self.Title = Title
-    self.Subtitle = Subtitle
-    self.BannerUrl = BannerUrl
+    self.Title = (Title or Parent.Title)
+    self.Subtitle = (Subtitle or Parent.Subtitle)
+    self.BannerUrl = (BannerUrl or Parent.BannerUrl)
     self.Priority = false
     self.Closable = true
     self.Items = {}
