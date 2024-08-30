@@ -18,7 +18,6 @@ client_scripts {
     "zUI/config.lua",
     "zUI/functions/*.lua",
     "zUI/menu.lua",
-    "zUI/menuController.lua",
     "zUI/utils/*.lua",
     "zUI/items/*.lua",
     -- Vos fichiers

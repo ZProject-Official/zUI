@@ -28,6 +28,12 @@ RegisterNUICallback("zUI-UseButton", function(ActionId, cb)
         SendNUIMessage({
             action = "zUI-Reset",
         })
+        CreateThread(function()
+            while ActionData.SubMenu.Priority do
+                ActionData.SubMenu:hide(IsPauseMenuActive())
+                Wait(150)
+            end
+        end)
     end
     cb("ok")
 end)
