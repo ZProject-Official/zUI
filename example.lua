@@ -38,4 +38,14 @@ end)
 
 SubMenu:SetItems(function(Items)
     Items:AddSeparator("Je suis le submenu :)")
+    Items:AddButton("Retour", "Retour au menu principal.", {}, function(onSelected, onHovered)
+        if onSelected then
+            Items:GoBack()
+        end
+    end)
+    Items:AddButton("Fermer", "Fermer le menu.", {}, function(onSelected, onHovered)
+        if onSelected then
+            zUI:CloseMenu()
+        end
+    end)
 end)
