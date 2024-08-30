@@ -86,7 +86,7 @@ Naviguez dans le répertoire cloné et installez les dépendances nécessaires p
 ```bash
 cd zUI
 cd web
-npm install && npm build
+npm install && npm run build
 ```
 
 Ou installez la version **Release**
