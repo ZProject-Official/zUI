@@ -1,0 +1,12 @@
+body {
+  user-select: none;
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h1 {
+  white-space: nowrap;
+}

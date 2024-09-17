@@ -1,0 +1,6 @@
+.zUI-Separator {
+  width: 15vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
