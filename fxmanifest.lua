@@ -7,26 +7,26 @@ description "zUI est une bibliothèque avancée pour créer des menus NUI dans F
 version "1.0.5"
 repository "https://github.com/ZProject-Official/zUI"
 
-ui_page "web/build/index.html"
+ui_page "zUI/web/build/index.html"
 
 files {
-    "theme.json",
-    "web/build/index.html",
-    "web/build/**/*"
+    "zUI/theme.json",
+    "zUI/web/build/index.html",
+    "zUI/web/build/**/*"
 }
 
 client_scripts {
     -- Fichiers zUI
-    "init.lua",
-    "menu.lua",
-    "methods/*.lua",
-    "functions/*.lua",
-    "items/*.lua",
+    "zUI/init.lua",
+    "zUI/menu.lua",
+    "zUI/methods/*.lua",
+    "zUI/functions/*.lua",
+    "zUI/items/*.lua",
     -- Vos fichiers
     "example.lua"
 }
 
 server_scripts {
     -- Gestion de la version
-    "version.lua",
+    "zUI/version.lua",
 }
