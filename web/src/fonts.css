@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Unigeo64-Bold";
+  src: local("Unigeo64-Bold"),
+    url("./assets/fonts/Unigeo64-Bold.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Lexend-Medium";
+  src: local("Lexend-Medium"),
+    url("./assets/fonts/Lexend-Medium.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Lexend-Regular";
+  src: local("Lexend-Regular"),
+    url("./assets/fonts/Lexend-Regular.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Lexend-Light";
+  src: local("Lexend-Light"),
+    url("./assets/fonts/Lexend-Light.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Apex";
+  src: local("Apex"), url("./assets/fonts/Apex.otf") format("opentype");
+}

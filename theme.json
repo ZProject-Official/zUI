@@ -1,0 +1,23 @@
+{
+  "position": "left",
+  "colors": {
+    "background": "rgba(18, 18, 18, 0.5)",
+    "secondary": "#121212"
+  },
+  "stringUpper": false,
+  "counter": true,
+  "banner": "#FA2C76",
+  "controlsIndicator": true,
+  "corners": {
+    "rounded": true,
+    "radius": "0.5"
+  },
+  "perspective": true,
+  "items": {
+    "defaultColor": "#FA2C76",
+    "hoverStyle": "neon",
+    "line": {
+      "rounded": true
+    }
+  }
+}

@@ -1,41 +1,36 @@
-local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "F1", "Ouvrir le menu exemple.", "https://i.ibb.co/z8TFzVq/banner.png")
-local SubMenu = zUI.CreateSubMenu(Menu, "Titre", "Sous-Titre")
+local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "https://i.ibb.co/z8TFzVq/banner.png", "F1", "Ouvrir le menu exemple.")
+local SubMenu = zUI.CreateSubMenu(Menu, "Titre", "Sous-Titre", nil)
 
 local CheckboxState = false
 
 Menu:SetItems(function(Items)
-    Items:AddSeparator("C'est un séparateur")
+    Items:AddSeparator("C'est un séparateur !")
     Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
-    Items:AddButton("Bouton", "Accéder au submenu.", { RightLabel = "→" }, function(onSelected, onHovered)
-    end, SubMenu)
-    Items:AddCheckbox("Checkbox", "Gérer l'êtat de la checkbox.", CheckboxState, { LeftBadge = "CASH" },
-        function(onSelected, onHovered, isChecked)
+    Items:AddButton("Titre", "Description", { RightLabel = "RightLabel", LeftBadge = "MEDAL_GOLD" },
+        function(onSelected, onHovered)
             if onSelected then
-                CheckboxState = isChecked
+                zUI.KeyboardInput("Saisie de nom", "Veuillez entrer un nom", "Entrez un nom ici...", "", 25)
+                print("J'ai été sélectionné !")
+            end
+        end, SubMenu)
+    Items:AddCheckbox("Titre", "Description", CheckboxState, {}, function(onSelected, onHovered)
+        if onSelected then
+            CheckboxState = not CheckboxState -- Important ⚠️
+        end
+    end)
+    Items:AddList("Titre", "Description", { "Item1", "Item2", "Item3", "Item4", "Item5" }, {},
+        function(onSelected, onHovered, onListChange, index)
+            if onSelected then
+                print(("Je suis sur l'index ~#faad2c~%s"):format(index))
             end
         end)
-    Items:AddList("Liste", "Choisir entre le ~#faccdd~KeyboardInput~s~ et le ~#dcc789~AlertInput~s~.",
-        { "KeyboardInput", "AlertInput" }, {}, function(onSelected, onHovered, onListChange, index)
-            if onSelected then
-                if index == 1 then
-                    local value = zUI.KeyboardInput("Titre", "Sous-titre", "Placeholder", 50)
-                    print(value)
-                else
-                    local value = zUI.AlertInput("Titre", "Sous-titre", "Le zUI est la meilleur librairie ?")
-                    print(value)
-                end
-            end
-        end)
-end)
-
-Menu:OnOpen(function()
-    print("Je suis ouvert !")
-end)
-
-Menu:OnClose(function()
-    print("Je suis fermé !")
+    Items:AddLinkButton("Documentation", "Accéder à la ~#faa55c~documentation.", {}, "https://zsquad.fr")
 end)
 
 SubMenu:SetItems(function(Items)
-    Items:AddSeparator("Je suis le submenu :)")
+    Items:AddButton("Retour", "Retourner au menu principal.", {}, function(onSelected, onHovered)
+        if onSelected then
+            SubMenu:Goback()
+        end
+    end)
 end)
