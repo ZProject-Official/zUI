@@ -28,12 +28,12 @@ function zUI.CreateMenu(Title, Subtitle, Banner, Key, Description)
     local MenuId = #Menus + 1
     ---@type zUI
     local self = setmetatable({}, zUI)
-    self.identifier = ("zUI-MenuIdentifier:%s"):format(MenuId)
+    self.identifier = ("zUI-MenuIdentifier:%s:%s"):format(MenuId, math.random())
     self.title = Title or ""
     self.subtitle = Subtitle or ""
     self.banner = Banner or ""
-    self.key = Key or nil
-    self.description = Description or nil
+    self.key = Key or ""
+    self.description = Description or ""
     self.items = {}
     self.itemsManager = nil
     self.isVisible = false

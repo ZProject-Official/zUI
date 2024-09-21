@@ -1,4 +1,4 @@
-local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "https://i.ibb.co/z8TFzVq/banner.png", "F1", "Ouvrir le menu exemple.")
+local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "https://i.ibb.co/z8TFzVq/banner.png", "F4", "Ouvrir le menu exemple.")
 local SubMenu = zUI.CreateSubMenu(Menu, "Titre", "Sous-Titre", nil)
 
 local CheckboxState = false

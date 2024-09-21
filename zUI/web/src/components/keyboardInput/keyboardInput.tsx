@@ -53,6 +53,7 @@ function KeyboardInput() {
     event.preventDefault();
     fetchNui("zUI-KeyboardResult", { inputValue: inputValue });
     SetVisible(false);
+    setInputValue("");
   };
 
   const handleCancel = (
@@ -62,6 +63,7 @@ function KeyboardInput() {
     event.stopPropagation();
     fetchNui("zUI-KeyboardCancel", {});
     SetVisible(false);
+    setInputValue("");
   };
 
   useEffect(() => {

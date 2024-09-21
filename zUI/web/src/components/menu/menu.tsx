@@ -332,13 +332,13 @@ function Menu() {
                 id="zUI-Banner"
                 style={{
                   minHeight:
-                    !isUrl(banner) && !isUrl(theme?.banner) ? "10vh" : "none",
+                    !isUrl(banner) && !isUrl(theme?.banner) ? "10vh" : "0%",
                   background:
                     banner.length > 1 && !isUrl(banner)
                       ? banner
                       : theme?.banner && !isUrl(theme.banner)
                       ? theme.banner
-                      : "none",
+                      : "transparent",
                 }}
               >
                 {banner.length < 1 && isUrl(theme?.banner) && (
