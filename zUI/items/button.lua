@@ -1,7 +1,7 @@
 --- Ajouter un bouton au menu.
----@param Title string @Titre du bouton.
----@param Description string | nil @Description du bouton.
----@param Styles { IsDisabled: boolean, RightLabel: string, RightBadge: BadgeName, LeftBadge: BadgeName, Color: string } @Éléments de style du bouton.
+---@param Title string | number @Titre du bouton.
+---@param Description string | number | nil @Description du bouton.
+---@param Styles { IsDisabled: boolean, RightLabel: string | number, RightBadge: BadgeName, LeftBadge: BadgeName, Color: string } @Éléments de style du bouton.
 ---@param Action fun(onSelected: boolean, onHovered: boolean) @Action que doit réaliser le bouton.
 ---@param Submenu zUI | nil @Submenu vers lequel mène le bouton.
 function zUI:AddButton(Title, Description, Styles, Action, Submenu)

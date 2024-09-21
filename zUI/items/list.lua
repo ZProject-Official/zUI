@@ -1,8 +1,8 @@
 --- Ajouter une liste au menu.
----@param Title string @Titre de la liste.
----@param Description string | nil @Description de la liste.
+---@param Title string | number @Titre de la liste.
+---@param Description string | number | nil @Description de la liste.
 ---@param Items table @Êtat de la liste.
----@param Styles { IsDisabled: boolean, RightLabel: string, RightBadge: BadgeName, LeftBadge: BadgeName, Color: string } @Éléments de style de la liste.
+---@param Styles { IsDisabled: boolean, RightLabel: string | number, RightBadge: BadgeName, LeftBadge: BadgeName, Color: string } @Éléments de style de la liste.
 ---@param Action fun(onSelected: boolean, onHovered: boolean, onListChange: boolean, index: number) @Action que doit réaliser la liste.
 function zUI:AddList(Title, Description, Items, Styles, Action)
     local ActionId = ("zUI-ListIdentifier:%s"):format(#self.items + 1)

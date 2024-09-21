@@ -4,7 +4,10 @@ import isDefined from "./isDefined";
 
 import isHexColor from "./isHexColor";
 
-const parseText = (text: string): string[] => {
+const parseText = (text: string | number): string[] => {
+  if (typeof text === "number") {
+    text = text.toString();
+  }
   return text.split("\n");
 };
 

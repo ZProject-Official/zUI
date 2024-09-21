@@ -1,8 +1,8 @@
 --- Ajouter une checkbox au menu.
----@param Title string @Titre de la checkbox.
----@param Description string | nil @Description de la checkbox.
+---@param Title string | number @Titre de la checkbox.
+---@param Description string | number | nil @Description de la checkbox.
 ---@param State boolean @Êtat de la checkbox.
----@param Styles { IsDisabled: boolean, RightLabel: string, RightBadge: BadgeName, LeftBadge: BadgeName, Color: string } @Éléments de style de la checkbox.
+---@param Styles { IsDisabled: boolean, RightLabel: string | number, RightBadge: BadgeName, LeftBadge: BadgeName, Color: string } @Éléments de style de la checkbox.
 ---@param Action fun(onSelected: boolean, onHovered: boolean) @Action que doit réaliser la checkbox.
 function zUI:AddCheckbox(Title, Description, State, Styles, Action)
     local ActionId = ("zUI-CheckboxIdentifier:%s"):format(#self.items + 1)

@@ -6,6 +6,6 @@ function RegisterMenu(menu)
                 menu:SetVisible(not menu:IsVisible())
             end
         end, false)
-        RegisterKeyMapping(menu.identifier, menu.description, 'keyboard', menu.key)
+        RegisterKeyMapping(menu.identifier, menu.description, "keyboard", menu.key)
     end
 end
