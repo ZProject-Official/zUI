@@ -1,15 +1,16 @@
+local sounds = {
+  ["down"] = "NAV_UP_DOWN",
+  ["up"] = "NAV_UP_DOWN",
+  ["left"] = "NAV_UP_DOWN",
+  ["right"] = "NAV_UP_DOWN",
+  ["enter"] = "SELECT",
+  ["backspace"] = "QUIT",
+  ["toggle"] = "TOGGLE_ON",
+}
+
 function PlaySound(Type)
-    local audio
-    if Type == "down" or Type == "up" or Type == "right" or Type == "left" then
-        audio = "NAV_UP_DOWN"
-    elseif Type == "enter" then
-        audio = "SELECT"
-    elseif Type == "backspace" then
-        audio = "QUIT"
-    elseif Type == "toggle" then
-        audio = "TOGGLE_ON"
-    end
-    PlaySoundFrontend(-1, audio, "HUD_FRONTEND_DEFAULT_SOUNDSET", true)
+    assert(sounds[Type], "Aucune son defini pour " .. Type)
+    PlaySoundFrontend(-1, sounds[Type], "HUD_FRONTEND_DEFAULT_SOUNDSET", true)
 end
 
 RegisterNUICallback("zUI-PlaySound", function(data, cb)
