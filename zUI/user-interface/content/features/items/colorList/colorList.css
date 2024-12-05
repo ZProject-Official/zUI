@@ -1,0 +1,22 @@
+.zUI-ColorCarousel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes scaleCircle {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.zUI-ColorCircle.selected {
+  animation: scaleCircle 0.3s ease-out;
+}

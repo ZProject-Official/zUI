@@ -1,5 +1,5 @@
---- Ajouter une ligne au menu.
----@param Colors table | nil @Couleurs de la ligne.
+--- Add a line to the menu.
+---@param Colors table | nil @The colors of the line.
 function zUI:AddLine(Colors)
     local Item = {}
     Item.type = "line"

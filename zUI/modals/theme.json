@@ -1,0 +1,17 @@
+{
+  "backgroundColor": "#121212",
+  "inputColor": "#222222",
+  "inputTextColor": "white",
+  "color": "#faad2c",
+  "borderRadius": 0.5,
+  "animations": {
+    "entry": "fadeIn",
+    "exit": "fadeOut"
+  },
+  "fonts": {
+    "title": "https://fonts.googleapis.com/css2?family=Lexend:wght@900&display=swap",
+    "names": "https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap",
+    "descriptions": "https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap",
+    "inputsContent": "https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap"
+  }
+}

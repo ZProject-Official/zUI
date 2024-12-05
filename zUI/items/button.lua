@@ -1,11 +1,11 @@
---- Ajouter un bouton au menu.
----@param Title string | number @Titre du bouton.
----@param Description string | number | nil @Description du bouton.
----@param Styles { IsDisabled: boolean, RightLabel: string | number, RightBadge: BadgeName, LeftBadge: BadgeName, Color: string } @Éléments de style du bouton.
----@param Action fun(onSelected: boolean, onHovered: boolean) @Action que doit réaliser le bouton.
----@param Submenu zUI | nil @Submenu vers lequel mène le bouton.
+--- Add a button to the menu.
+---@param Title string | number @The title of the button.
+---@param Description string | number | nil @The description of the button.
+---@param Styles { IsDisabled: boolean, RightLabel: string | number, RightBadge: BadgeName, LeftBadge: BadgeName, Color: string } @The style elements of the button.
+---@param Action fun(onSelected: boolean, onHovered: boolean) @The action the button should perform.
+---@param Submenu zUI | nil @The submenu that the button leads to.
 function zUI:AddButton(Title, Description, Styles, Action, Submenu)
-    local ActionId = ("zUI-ButtonIdentifier:%s"):format(#self.items + 1)
+    local ActionId = ("zUI-Menu:%s@ButtonIdentifier:%s"):format(self.identifier, #self.items + 1)
     local Item = {}
     Item.type = "button"
     Item.title = Title
@@ -25,8 +25,11 @@ RegisterNUICallback("zUI-UseButton", function(ActionId, cb)
         Citizen.Wait(10)
         ActionData.parent.priority = false
         ActionData.submenu.priority = true
+        if ActionData.submenu.openingEvent then
+            ActionData.submenu.openingEvent()
+        end
         UpdateItems(ActionData.submenu)
-        MenuControls(ActionData.submenu)
+        ManageControls(ActionData.submenu)
         SendNUIMessage({
             action = "zUI-Reset",
             data = {

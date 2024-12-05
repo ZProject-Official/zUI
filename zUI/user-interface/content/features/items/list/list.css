@@ -1,0 +1,11 @@
+.zUI-ListCarousel {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5vw;
+}
+.zUI-ListIcon {
+  min-width: 0.5vw;
+  max-width: 0.5vw;
+}

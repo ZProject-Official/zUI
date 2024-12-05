@@ -1,0 +1,141 @@
+* {
+  --menuDefaultWidth: 20%;
+  --defaultHeight: 4vh;
+}
+
+#zUI-MenuContainer {
+  width: 100%;
+  height: 100%;
+  padding: 2.5% 1.5%;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2.5%;
+  perspective: 100vw;
+  transform-style: preserve-3d;
+}
+
+#zUI-Menu {
+  min-width: var(--menuDefaultWidth);
+  max-width: var(--menuDefaultWidth);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#zUI-MenuDescription {
+  min-height: 2vh;
+  width: var(--menuDefaultWidth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: left;
+  z-index: 1;
+}
+
+#zUI-MenuBanner {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#zUI-BannerTexts {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.zUI-BannerTitle {
+  color: white;
+  font-size: 175%;
+}
+
+.zUI-BannerSubtitle {
+  color: white;
+  font-size: 125%;
+}
+
+#zUI-MenuDescriptionContainer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 3.5%;
+  min-height: var(--defaultHeight);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.zUI-MenuDescription {
+  color: white;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-align: left;
+}
+
+#zUI-MenuItemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+#zUI-MenuItemsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+#zUI-ControlsIndicator {
+  width: 100%;
+  height: var(--defaultHeight);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+#zUI-MenuItemsDescription {
+  overflow: hidden;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+#zUI-InfosPanel {
+  width: var(--menuDefaultWidth);
+  box-sizing: border-box;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5vh;
+}
+
+.zUI-Info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

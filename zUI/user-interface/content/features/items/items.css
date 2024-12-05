@@ -1,0 +1,58 @@
+.zUI-Item {
+  position: relative;
+  width: 100%;
+  min-height: 4vh;
+  max-height: 4vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 4%;
+}
+
+.zUI-ImageHover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+}
+
+.zUI-ContentWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.zUI-ItemLeftZone {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  gap: 1vw;
+}
+
+.zUI-ItemRightZone {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  gap: 1vw;
+}
+
+.zUI-ItemTitle {
+  color: white;
+  font-size: 0.85vw;
+}
+
+.zUI-Badge {
+  max-width: 2vw;
+  vertical-align: middle;
+}

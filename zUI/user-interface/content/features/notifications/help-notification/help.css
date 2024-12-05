@@ -1,0 +1,17 @@
+#zUI-HelpNotification {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(18, 18, 18, 0.75),
+    transparent
+  );
+  padding: 2% 3%;
+  width: auto;
+  height: auto;
+  max-width: 12.5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+}

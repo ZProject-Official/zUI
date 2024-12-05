@@ -1,0 +1,36 @@
+{
+  "position": "left",
+  "displayDescription": true,
+  "displayControlsIndicator": true,
+  "colors": {
+    "background": "rgba(18, 18, 18, 0.5)",
+    "description": "#121212",
+    "controlsIndicator": "#121212",
+    "item": "#faad2c"
+  },
+  "animations": {
+    "entry": "slideInHorizontal",
+    "exit": "fadeOut",
+    "onScroll": true
+  },
+  "fonts": {
+    "title": "https://fonts.googleapis.com/css2?family=Lexend:wght@900&display=swap",
+    "subtitle": "https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap",
+    "description": "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@700&display=swap",
+    "counter": "https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@400&display=swap",
+    "itemTitle": "https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap",
+    "itemRightLabel": "https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap",
+    "info": "https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap",
+    "infoPanelTitle": "https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap"
+  },
+  "banner": "#faad2c",
+  "cornersRadius": 0,
+  "perspective": false,
+  "padding": false,
+  "items": {
+    "maxItems": 10,
+    "hoverStyle": "complete",
+    "hoverColor": "#faad2c",
+    "lineIsRounded": false
+  }
+}

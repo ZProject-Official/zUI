@@ -1,0 +1,25 @@
+{
+  "colors": {
+    "background": "rgba(18, 18, 18, 0.5)",
+    "item": "#faad2c"
+  },
+  "animations": {
+    "entry": "popIn",
+    "exit": "popOut"
+  },
+  "fonts": {
+    "title": "https://fonts.googleapis.com/css2?family=Doto:wght@900&display=swap",
+    "subtitle": "https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap",
+    "description": "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@700&display=swap",
+    "counter": "https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@400&display=swap",
+    "itemTitle": "https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap",
+    "itemRightLabel": "https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap"
+  },
+  "cornersRadius": 1,
+  "padding": false,
+  "items": {
+    "hoverStyle": "complete",
+    "hoverColor": "#FAAD2C",
+    "lineIsRounded": true
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "notifications": {
+    "colors": {
+      "background": "rgba(18, 18, 18, 0.5)",
+      "timer": "white"
+    },
+    "animations": {
+      "entry": "fadeIn",
+      "exit": "fadeOut"
+    }
+  },
+  "pulsingNotifications": {
+    "defaultColor": "#faad2c",
+    "animations": {
+      "entry": "popIn",
+      "exit": "popOut"
+    }
+  },
+  "helpNotifications": {
+    "defaultColor": "#faad2c",
+    "animations": {
+      "entry": "slideInVertical",
+      "exit": "slideOutVertical"
+    }
+  },
+  "fonts": {
+    "key": "https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap",
+    "pulsingDescription": "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@400&display=swap",
+    "notificationTitle": "https://fonts.googleapis.com/css2?family=Lexend:wght@900&display=swap",
+    "notificationDescription": "https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap",
+    "notificationType": "https://fonts.googleapis.com/css2?family=Lexend:wght@800&display=swap",
+    "helpNotification": "https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap"
+  }
+}

@@ -1,0 +1,100 @@
+#zUI-ModalContainer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#zUI-Modal {
+  color: white;
+  width: 15%;
+  max-height: 80%;
+  box-sizing: border-box;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1vh;
+  overflow-y: auto;
+  z-index: 9999;
+}
+
+#zUI-ModalForm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+}
+
+.zUI-Input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5vh;
+}
+
+#zUI-ModalContainer {
+  pointer-events: auto;
+}
+
+#zUI-ModalActions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.zUI-InteractiveInput {
+  box-sizing: border-box;
+  width: 100%;
+  height: 3vh;
+  padding: 5%;
+  outline: none;
+  border-radius: 0.25em;
+  border: none;
+  box-shadow: 0 0 0px #222222;
+  color: white;
+  transition: 0.5s;
+}
+
+.zUI-InteractiveInput:focus {
+  border-radius: 0.5em;
+  box-shadow: 0 0 10px #222222;
+}
+
+.zUI-ModalButton {
+  height: 3.5vh;
+  padding: 0 5%;
+  outline: none;
+  border: none;
+  border-radius: 0.5em;
+  transition: 0.5s;
+}
+
+.zUI-ButtonPrimary {
+  background-color: var(--modalColor);
+  color: white;
+}
+
+.zUI-ButtonSecondary {
+  box-sizing: border-box;
+  background: transparent;
+  border: solid 3px var(--modalColor);
+  color: var(--modalColor);
+}
+
+.zUI-ButtonPrimary:hover {
+  box-shadow: 0 0 10px var(--modalColor);
+}
+
+.zUI-ButtonSecondary:hover {
+  box-shadow: 0 0 10px var(--modalColor), 0 0 10px var(--modalColor) inset;
+}

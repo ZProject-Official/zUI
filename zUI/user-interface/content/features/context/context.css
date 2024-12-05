@@ -1,0 +1,35 @@
+* {
+  --contextMenuDefaultWidth: 12.5vw;
+}
+
+#zUI-ContextMenu {
+  min-width: var(--contextMenuDefaultWidth);
+  max-width: var(--contextMenuDefaultWidth);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#zUI-ContextMenuItemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+#zUI-ContextDescription {
+  width: var(--contextMenuDefaultWidth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  box-sizing: border-box;
+  padding: 5%;
+  color: white;
+  text-align: left;
+}

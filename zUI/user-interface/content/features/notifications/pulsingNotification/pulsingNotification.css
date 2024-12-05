@@ -1,0 +1,62 @@
+#zUI-PulsingNotification {
+  position: absolute;
+  min-height: 3%;
+  max-width: 3%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5vw;
+  transition: 0.01s;
+}
+
+#zUI-PulsingDisabled {
+  height: 3vh;
+  width: 3vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 100em;
+}
+
+#gradient-wrapper {
+  box-sizing: border-box;
+  min-width: 3vh;
+  max-width: 3vh;
+  height: 3vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom right, white 0%, transparent 50%),
+    linear-gradient(to top right, transparent 0%, transparent 0%),
+    linear-gradient(to top left, white 0%, transparent 50%),
+    linear-gradient(to bottom left, transparent 0%, transparent 0%);
+  background-blend-mode: mix;
+}
+
+#zUI-PulsingDescription {
+  color: white;
+  font-size: 100%;
+}
+
+#zUI-PulsingKey {
+  box-shadow: 0 0 10px black;
+  min-width: 2.5vh;
+  max-width: 2.5vh;
+  height: 2.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  align-self: center;
+  align-content: center;
+  box-sizing: border-box;
+  padding-top: 6%;
+  font-size: 100%;
+  position: relative;
+}

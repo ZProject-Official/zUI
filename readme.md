@@ -10,50 +10,131 @@
 ## 💻 Exemple de Code Illustré
 
 ```lua
-local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "https://i.ibb.co/z8TFzVq/banner.png", "F1", "Ouvrir le menu exemple.")
-local SubMenu = zUI.CreateSubMenu(Menu, "Titre", "Sous-Titre", nil)
+local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "Voici la description", nil, "F1", "Ouvrir le Menu exemple.")
+local subMenu = zUI.CreateSubMenu(Menu, "Titre", "Sous-Titre", "Voici la description")
 
-local CheckboxState = false
+local checkboxState = false
+local percentage = 0
+local index = 1
+local colorListIndex = 1
 
 Menu:SetItems(function(Items)
-    Items:AddSeparator("C'est un séparateur !")
-    Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
-    Items:AddButton("Titre", "Description", { RightLabel = "RightLabel", LeftBadge = "MEDAL_GOLD" },
+    Items:AddSeparator("Séparateur")
+    Items:AddLine()
+    Items:AddButton("Titre", "Je suis un bouton", {},
         function(onSelected, onHovered)
-            if onSelected then
-                zUI.KeyboardInput("Saisie de nom", "Veuillez entrer un nom", "Entrez un nom ici...", "", 25)
-                print("J'ai été sélectionné !")
-            end
-        end, SubMenu)
-    Items:AddCheckbox("Titre", "Description", CheckboxState, {}, function(onSelected, onHovered)
+
+        end, subMenu)
+    Items:AddLinkButton("Titre", "Je suis un bouton lien", {}, "https://zsquad.fr")
+    Items:AddCheckbox("Titre", "Je suis une checkbox", checkboxState, {}, function(onSelected, onHovered)
         if onSelected then
-            CheckboxState = not CheckboxState -- Important ⚠️
+            checkboxState = not checkboxState
         end
     end)
-    Items:AddList("Titre", "Description", { "Item1", "Item2", "Item3", "Item4", "Item5" }, {},
-        function(onSelected, onHovered, onListChange, index)
-            if onSelected then
-                print(("Je suis sur l'index ~#faad2c~%s"):format(index))
+    Items:AddSlider("Titre", "Je suis un slider", percentage, 10, {},
+        function(onSelected, onHovered, onChange, percentage)
+            if onChange then
+                percentage = percentage
             end
         end)
-    Items:AddLinkButton("Documentation", "Accéder à la ~#faa55c~documentation.", {}, "https://zsquad.fr")
+    Items:AddList("Titre", "Je suis une liste", index, { "Item #1", "Item #2" }, {},
+        function(onSelected, onHovered, onListChange, i)
+            if onListChange then
+                index = i
+            end
+        end)
+    Items:AddColorList("Titre", "C'est une liste de couleurs", colorListIndex,
+        { "#00ff00", "#fffd2c", "#ff00ff", "#ff0000", "#0000ff" }, {},
+        function(onSelected, onHovered, onListChange, index)
+            if onListChange then
+                colorListIndex = index
+            end
+        end)
 end)
 
-SubMenu:SetItems(function(Items)
-    Items:AddButton("Retour", "Retourner au menu principal.", {}, function(onSelected, onHovered)
+subMenu:SetItems(function(Items)
+    Items:AddSeparator("Sous Menu", "right")
+    Items:AddLine()
+    Items:AddButton("Titre", "Je suis un bouton", {}, function(onSelected, onHovered)
         if onSelected then
-            SubMenu:Goback()
+            local value = zUI.ShowModal("Titre", {
+                { type = "text",        name = "Text input",     description = "Input description", isRequired = false, minLength = 4, maxLength = 15 },
+                { type = "number",      name = "Number input",   description = "Input description", isRequired = false },
+                { type = "checkbox",    name = "Checkbox input", description = "Input description", defaultValue = true },
+                { type = "colorpicker", name = "Color input",    defaultValue = "#faad2c" },
+                { type = "date",        name = "Date input",     format = "DD/MM/YYYY" }
+            }, {})
+            print(value[1])
+        end
+    end)
+    Items:AddButton("Titre", "Je suis un bouton", {}, function(onSelected, onHovered)
+        if onHovered then
+            zUI.ShowInfo("Titre", nil, {
+                { "Titre", "Valeur" },
+                { "Titre", "Valeur" },
+                { "Titre", "Valeur" },
+                { "Titre", "Valeur" },
+            })
         end
     end)
 end)
 
-
 Menu:OnOpen(function()
-    print("Je suis ouvert !")
+    print("Menu open")
+end)
+
+subMenu:OnOpen(function()
+    print("subMenu open")
 end)
 
 Menu:OnClose(function()
-    print("Je suis fermé !")
+    print("Menu close")
+end)
+
+subMenu:OnClose(function()
+    print("subMenu close")
+end)
+
+zUI.CreateContext("vehicle", function(Items, coords3D, Entity)
+    Items:AddSeparator("vehicle")
+end)
+
+zUI.CreateContext("props", function(Items, coords3D, Entity)
+    Items:AddSeparator("props")
+end)
+
+zUI.CreateContext("ped", function(Items, coords3D, Entity)
+    Items:AddSeparator("ped")
+end)
+
+zUI.CreateContext("other", function(Items, coords3D, Entity)
+    Items:AddSeparator("other")
+end)
+
+local coords = vector3(350.46109008789, 932.27905273438, 203.43138122559)
+
+zUI.CreateContext(coords, function(Items, coords3D, Entity)
+    Items:AddSeparator("vector")
+end)
+
+local withContext = true
+
+Citizen.CreateThread(function()
+    while true do
+        Wait(0)
+        if #(coords - GetEntityCoords(PlayerPedId())) < 3 then
+            if withContext then
+                zUI.DisplayPulsingNotification("", "", coords, { IsDisabled = true })
+            else
+                zUI.DisplayPulsingNotification("E", "Intéragir", coords, {})
+                if IsControlJustPressed(0, 51) then
+                    zUI.SendNotification("Titre", "Vous avez appuyer sur E", {},
+                        "https://i.postimg.cc/jSs6YGNh/ZProject-4.jpg",
+                        "https://i.postimg.cc/pdrDpzsh/ZBanner-Paypal.png")
+                end
+            end
+        end
+    end
 end)
 ```
 
@@ -103,7 +184,7 @@ Maintenant que vous avez mis en place les bases, il est temps de vous amuser ave
 Pour créer un menu avec **zUI**, utilisez la fonction `zUI.CreateMenu`. Voici un exemple de création de menu :
 
 ```lua
-local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "Url de votre bannière", "F1", "Ouvrir le menu exemple.")
+local Menu = zUI.CreateMenu("Titre", "Sous-Titre", "Voici la description", nil, "F1", "Ouvrir le Menu exemple.")
 ```
 
 ### Ajouter des Éléments au Menu
@@ -112,27 +193,37 @@ Une fois le menu créé, vous pouvez ajouter des composants tels que des sépara
 
 ```lua
 Menu:SetItems(function(Items)
-    Items:AddSeparator("C'est un séparateur !")
-    Items:AddLine({ "#ff0000", "#00ff00", "#0000ff" })
-    Items:AddButton("Titre", "Description", { RightLabel = "RightLabel", LeftBadge = "MEDAL_GOLD" },
+    Items:AddSeparator("Séparateur")
+    Items:AddLine()
+    Items:AddButton("Titre", "Je suis un bouton", {},
         function(onSelected, onHovered)
-            if onSelected then
-                zUI.KeyboardInput("Saisie de nom", "Veuillez entrer un nom", "Entrez un nom ici...", "", 25)
-                print("J'ai été sélectionné !")
-            end
-        end, SubMenu)
-    Items:AddCheckbox("Titre", "Description", CheckboxState, {}, function(onSelected, onHovered)
+
+        end, subMenu)
+    Items:AddLinkButton("Titre", "Je suis un bouton lien", {}, "https://zsquad.fr")
+    Items:AddCheckbox("Titre", "Je suis une checkbox", checkboxState, {}, function(onSelected, onHovered)
         if onSelected then
-            CheckboxState = not CheckboxState -- Important ⚠️
+            checkboxState = not checkboxState
         end
     end)
-    Items:AddList("Titre", "Description", { "Item1", "Item2", "Item3", "Item4", "Item5" }, {},
-        function(onSelected, onHovered, onListChange, index)
-            if onSelected then
-                print(("Je suis sur l'index ~#faad2c~%s"):format(index))
+    Items:AddSlider("Titre", "Je suis un slider", percentage, 10, {},
+        function(onSelected, onHovered, onChange, percentage)
+            if onChange then
+                percentage = percentage
             end
         end)
-    Items:AddLinkButton("Documentation", "Accéder à la ~#faa55c~documentation.", {}, "https://zsquad.fr")
+    Items:AddList("Titre", "Je suis une liste", index, { "Item #1", "Item #2" }, {},
+        function(onSelected, onHovered, onListChange, i)
+            if onListChange then
+                index = i
+            end
+        end)
+    Items:AddColorList("Titre", "C'est une liste de couleurs", colorListIndex,
+        { "#00ff00", "#fffd2c", "#ff00ff", "#ff0000", "#0000ff" }, {},
+        function(onSelected, onHovered, onListChange, index)
+            if onListChange then
+                colorListIndex = index
+            end
+        end)
 end)
 ```
 
@@ -169,6 +260,10 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 ### [v1.0.5] - 2024-09-17
 
 - Refonte totale. Ajout de différentes features (HelpNotification, RenderSprite, LinkButton, CloseAll, Theme.json, Badges Personnalisés, Documentation, Optimisation, Position des séparateurs)
+
+### [v1.0.6] - 2024-12-05
+
+- Refonte totale. Ajout de différentes features (HelpNotification, PulsingNotifications, Notifications, ContextUI, ColorList, Slider, Info, Modal, Themes, ApplyTheme)
 
 ## 📬 **Support**
 

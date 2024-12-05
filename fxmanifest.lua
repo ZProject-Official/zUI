@@ -3,30 +3,34 @@ game "gta5"
 lua54 "yes"
 
 author "zSquad - Soren & Jules"
-description "zUI est une bibliothèque avancée pour créer des menus NUI dans FiveM, alliant sobriété, optimisation et esthétique. Basée sur React pour l'interface et Lua pour les scripts, elle modernise et simplifie la création de menus, s'inspirant de RageUI tout en améliorant l'expérience utilisateur."
-version "1.0.5"
+description "zUI is an advanced library for creating NUI menus in FiveM, combining simplicity, optimization, and aesthetics. Built with React for the interface and Lua for scripting, it modernizes and simplifies menu creation, drawing inspiration from RageUI while enhancing the user experience."
+version "1.0.6"
 repository "https://github.com/ZProject-Official/zUI"
 
-ui_page "zUI/web/build/index.html"
-
 files {
-    "zUI/theme.json",
-    "zUI/web/build/index.html",
-    "zUI/web/build/**/*"
+    "zUI/menus/theme.json",
+    "zUI/notifications/theme.json",
+    "zUI/contextMenus/theme.json",
+    "zUI/modals/theme.json",
+    "zUI/user-interface/build/index.html",
+    "zUI/user-interface/build/**/*"
 }
+
+ui_page "zUI/user-interface/build/index.html"
 
 client_scripts {
-    -- Fichiers zUI
-    "zUI/init.lua",
-    "zUI/menu.lua",
-    "zUI/methods/*.lua",
-    "zUI/functions/*.lua",
+    -- [[zUI]]
+    "zUI/*.lua",
     "zUI/items/*.lua",
-    -- Vos fichiers
-    "example.lua"
-}
-
-server_scripts {
-    -- Gestion de la version
-    "zUI/version.lua",
+    "zUI/menus/_init.lua",
+    "zUI/menus/menu.lua",
+    "zUI/menus/methods/*.lua",
+    "zUI/menus/functions/*.lua",
+    "zUI/notifications/*.lua",
+    "zUI/contextMenus/components/*.lua",
+    "zUI/contextMenus/*.lua",
+    "zUI/contextMenus/functions/*.lua",
+    "zUI/modals/*.lua",
+    -- [[Script]]
+    "main.lua"
 }

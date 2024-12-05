@@ -1,6 +1,6 @@
---- Ajouter un séparateur au menu.
----@param Title string | number @Titre du séparateur.
----@param Position string | nil @Position du séparateur.
+--- Add a separator to the menu.
+---@param Title string | number @The title of the separator.
+---@param Position string | nil @The position of the separator.
 function zUI:AddSeparator(Title, Position)
     local Item = {}
     Item.type = "separator"
