@@ -17,8 +17,8 @@ function zUI.CreateMenu(title, subTitle, description, banner, key, mappingDescri
     self.subtitle = subTitle or ""
     self.description = description or ""
     self.banner = banner or ""
-    self.key = key or ""
-    self.mappingDescription = mappingDescription or ""
+    self.key = key
+    self.mappingDescription = mappingDescription
     self.items = {}
     self.itemsManager = nil
     self.isVisible = false
