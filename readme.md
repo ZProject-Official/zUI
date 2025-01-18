@@ -165,7 +165,7 @@ Naviguez dans le répertoire cloné et installez les dépendances nécessaires p
 
 ```bash
 cd zUI
-cd web
+cd user-interface
 npm install && npm run build
 ```
 
