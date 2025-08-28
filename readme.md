@@ -267,7 +267,7 @@ R : Absolument, **zUI** est conçu pour être entièrement compatible avec d'aut
 
 ## 📬 **Support**
 
-Pour toute question ou problème, rejoignez notre [Discord](https://discord.gg/ZGzmkMd4rs).
+Pour toute question ou problème, rejoignez notre [Discord](https://discord.gg/hN5PZwkuGJ).
 
 ## 📜 **Licence**
 
